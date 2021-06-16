@@ -25,7 +25,7 @@ vim.g.ayu_mirage = true
 | Option              | Default     | Description                                                                             |
 | --------------------| ----------- | ----------------------------------------------------------------------------------------|
 | ayu_disable_bg      | `false`     | Disable the setting of background color so that NeoVim can use your terminal background |
-| ayu_borders         | `false`     | Enable the border between verticaly split windows visable                               |
+| ayu_borders         | `false`     | Enable the border between verticaly split windows visible                               |
 | ayu_contrast        | `true`      | Make sidebars and popup menus like nvim-tree and telescope have a different background  |
 | ayu_contrast_amount | `-30`       | Contrast percentage for sidebars and popup menus (negative values to darken)            |
 | ayu_italic_comments | `false`     | Make comments italic                                                                    |
