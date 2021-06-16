@@ -49,15 +49,14 @@ function M.apply()
   )
 
   -- load base theme
-  -- TODO: reintroduces overrides
   local editor = ayu.define_editor()
   for group, color in pairs(editor) do
-      utils.highlight(group, color)
+    utils.highlight(group, color)
   end
 
   local syntax = ayu.define_syntax()
   for group, color in pairs(syntax) do
-      utils.highlight(group, color)
+    utils.highlight(group, color)
   end
 
   async:send()
