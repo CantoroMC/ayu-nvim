@@ -13,7 +13,7 @@ ayu.define_syntax = function ()
     Debug               = { fg = colors.accent },
     Define              = { fg = colors.keyword },
     Delimiter           = { fg = colors.special },
-    Error               = { fg = colors.fg, bg = colors.error },
+    Error               = { fg = colors.error, sp = 'underline' },
     Exception           = { fg = colors.markup },
     Float               = { fg = colors.markup },
     Function            = { fg = colors.func },
