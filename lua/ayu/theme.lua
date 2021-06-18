@@ -310,6 +310,26 @@ ayu.define_plugins = function()
     CursorWord0 = { bg = colors.selection_inactive },
     CursorWord1 = { bg = colors.selection_inactive },
     -- }}}
+    -- COC: {{{2
+    CocCodeLens           = {fg = colors.comment },
+    CocDiagnosticsError   = {fg = colors.error },
+    CocDiagnosticsHint    = {fg = colors.blue },
+    CocDiagnosticsInfo    = {fg = colors.tag },
+    CocDiagnosticsWarning = {fg = colors.orange },
+    CocErrorFloat         = {fg = colors.error },
+    CocErrorHighlight     = {fg = colors.none, bg = colors.none, style = 'undercurl', sp = colors.error },
+    CocErrorSign          = {fg = colors.error },
+    CocHintFloat          = {fg = colors.regexp },
+    CocHintHighlight      = {fg = colors.none, bg = colors.none, style = 'undercurl', sp = colors.regexp },
+    CocHintSign           = {fg = colors.regexp },
+    CocInfoFloat          = {fg = colors.tag },
+    CocInfoHighlight      = {fg = colors.none, bg = colors.none, style = 'undercurl', sp = colors.tag },
+    CocInfoSign           = {fg = colors.tag },
+    CocSelectedText       = {fg = colors.red },
+    CocWarningFloat       = {fg = colors.warning },
+    CocWarningHighlight   = {fg = colors.none, bg = colors.none, style = 'undercurl', sp = colors.warning },
+    CocWarningSign        = {fg = colors.warning },
+    -- }}}
     -- DIFF: {{{2
     diffAdded     = { fg = colors.vcs_added },
     diffChanged   = { fg = colors.vcs_modified },
