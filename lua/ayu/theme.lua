@@ -363,8 +363,8 @@ ayu.define_plugins = function()
     HopUnmatched = { fg = colors.comment },
     -- }}}
     -- INDENTBLANKLINE: {{{2
-    IndentBlanklineChar        = { fg = colors.tag },
-    IndentBlanklineContextChar = { fg = colors.tag },
+    IndentBlanklineChar        = { fg = colors.guide_active },
+    IndentBlanklineContextChar = { fg = colors.guide_active },
     -- }}}
     -- LSPSAGA: {{{2
     -- DiagnosticError            = { fg = colors.error },
