@@ -428,6 +428,11 @@ ayu.define_plugins = function()
     -- Sneak      = { fg = colors.bg, bg = colors.accent },
     -- SneakScope = { bg = colors.selection },
     -- }}}
+    -- STARTIFY: {{{2
+    StartifyNumber = { fg = colors.comment },
+    StartifyBracket = { fg = colors.comment },
+    StartifySection = { fg = colors.accent },
+    -- }}}
     -- TELESCOPE: {{{2
     TelescopeNormal         = { fg = colors.fg, bg = colors.float },
     TelescopePromptBorder   = { fg = colors.accent },
@@ -441,7 +446,7 @@ ayu.define_plugins = function()
     WhichKey          = { fg = colors.accent , style = 'bold'},
     WhichKeyGroup     = { fg = colors.entity },
     WhichKeyDesc      = { fg = colors.func, style = 'italic' },
-    WhichKeySeperator = { fg = colors.fg },
+    WhichKeySeparator = { fg = colors.fg },
     WhichKeyFloating  = { bg = colors.float },
     WhichKeyFloat     = { bg = colors.float },
     -- }}}
@@ -450,8 +455,16 @@ ayu.define_plugins = function()
   --Set transparent background
   if vim.g.ayu_disable_bg then
     plugins.NvimTreeNormal = { fg = colors.fg, bg = colors.none }
+    plugins.StartifyFile   = { fg = colors.fg, bg = colors.none }
+    plugins.StartifyFooter = { fg = colors.fg, bg = colors.none }
+    plugins.StartifySlash  = { fg = colors.fg, bg = colors.none }
+    plugins.StartifyPath   = { fg = colors.entity, bg = colors.none, style = 'italic' }
   else
     plugins.NvimTreeNormal = { fg = colors.fg, bg = colors.sidebar }
+    plugins.StartifyFile   = { fg = colors.fg, bg = colors.sidebar }
+    plugins.StartifyFooter = { fg = colors.fg, bg = colors.sidebar }
+    plugins.StartifySlash  = { fg = colors.fg, bg = colors.sidebar }
+    plugins.StartifyPath   = { fg = colors.entity, bg = colors.sidebar, style = 'italic' }
   end
 
   return plugins
