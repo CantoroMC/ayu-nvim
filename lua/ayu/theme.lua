@@ -424,6 +424,27 @@ ayu.define_plugins = function()
     NvimTreeSpecialFile      = { fg = colors.fg },
     NvimTreeWindowPicker     = { fg = colors.keyword, bg = colors.panel_border, style = 'bold' },
     -- }}}
+    -- PACKER: {{{2
+    packerBool             = { fg = colors.markup,             bg = colors.none },
+    packerFail             = { fg = colors.error,              bg = colors.none },
+    packerHash             = { fg = colors.vcs_added,          bg = colors.none },
+    packerOutput           = { fg = colors.fg,                 bg = colors.none },
+    packerPackageName      = { fg = colors.entity,             bg = colors.none },
+    packerPackageNotLoaded = { fg = colors.keyword,            bg = colors.none },
+    packerProgress         = { fg = colors.constant,           bg = colors.none },
+    packerRelDate          = { fg = colors.constant,           bg = colors.none },
+    packerStatus           = { fg = colors.entity,             bg = colors.none },
+    packerStatusCommit     = { fg = colors.vcs_added,          bg = colors.none },
+    packerStatusFail       = { fg = colors.vcs_removed,        bg = colors.none },
+    packerStatusSuccess    = { fg = colors.vcs_diff_text,      bg = colors.none },
+    packerString           = { fg = colors.string,             bg = colors.none, style = 'italic' },
+    packerSuccess          = { fg = colors.ui,                 bg = colors.none },
+    packerTimeHigh         = { fg = colors.selection_bg,       bg = colors.none },
+    packerTimeLow          = { fg = colors.selection_border,   bg = colors.none },
+    packerTimeMedium       = { fg = colors.selection_inactive, bg = colors.none },
+    packerTrivial          = { fg = colors.warning,            bg = colors.none },
+    packerWorking          = { fg = colors.fg_idle,            bg = colors.none },
+    -- }}}
     -- SNEAK: {{{2
     -- Sneak      = { fg = colors.bg, bg = colors.accent },
     -- SneakScope = { bg = colors.selection },
