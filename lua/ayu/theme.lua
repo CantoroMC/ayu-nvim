@@ -335,7 +335,7 @@ ayu.define_plugins = function()
     diffChanged   = { fg = colors.vcs_modified },
     diffFile      = { fg = colors.guide_active },
     diffIndexLine = { fg = colors.keyword },
-    diffLine      = { fg = colors.line },
+    diffLine      = { fg = colors.vcs_diff_text },
     diffNewFile   = { fg = colors.ui },
     diffOldFile   = { fg = colors.guide_normal },
     diffRemoved   = { fg = colors.vcs_removed },
