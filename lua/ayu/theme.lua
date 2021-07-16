@@ -275,6 +275,7 @@ end
 -- LSP: {{{1
 ayu.define_LSP = function ()
   local lsp = {
+    LspCodeLens                          = { fg = colors.comment },
     LspDiagnosticsDefaultError           = { fg = colors.error },
     LspDiagnosticsDefaultHint            = { fg = colors.regexp  },
     LspDiagnosticsDefaultInformation     = { fg = colors.tag },
