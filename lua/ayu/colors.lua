@@ -95,6 +95,19 @@ if vim.o.background == 'dark' then
     colors.vcs_removed_bg     = '#2d2220'
     -- }}}
   end
+
+-- CONTRAST: sidebars, floating windows and popup menus {{{2
+if vim.g.ayu_contrast then
+  local contrast_amount = vim.g.ayu_contrast_amount
+    and vim.g.ayu_contrast_amount or -30
+  colors.sidebar = utils.shade(colors.bg, contrast_amount)
+  colors.float   = utils.shade(colors.bg, contrast_amount)
+else
+  colors.sidebar = colors.bg
+  colors.float   = colors.bg
+end
+-- }}}
+
 else
   -- LIGHT: {{{2
   -- basics
@@ -138,18 +151,6 @@ else
   colors.vcs_removed        = '#f27983'
   colors.vcs_removed_bg     = '#f9ebe4'
   -- }}}
-end
--- }}}
-
--- CONTRAST: sidebars, floating windows and popup menus {{{1
-if vim.g.ayu_contrast then
-  local contrast_amount = vim.g.ayu_contrast_amount
-    and vim.g.ayu_contrast_amount or -30
-  colors.sidebar = utils.shade(colors.bg, contrast_amount)
-  colors.float   = utils.shade(colors.bg, contrast_amount)
-else
-  colors.sidebar = colors.bg
-  colors.float   = colors.bg
 end
 -- }}}
 
