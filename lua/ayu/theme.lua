@@ -540,11 +540,11 @@ ayu.define_plugins = function()
     plugins.StartifySlash  = { fg = c.fg, bg = c.none }
     plugins.StartifyPath   = { fg = c.entity, bg = c.none, style = 'italic' }
   else
-    plugins.NvimTreeNormal = { fg = c.fg, bg = c.sidebar }
-    plugins.StartifyFile   = { fg = c.fg, bg = c.sidebar }
-    plugins.StartifyFooter = { fg = c.fg, bg = c.sidebar }
-    plugins.StartifySlash  = { fg = c.fg, bg = c.sidebar }
-    plugins.StartifyPath   = { fg = c.entity, bg = c.sidebar, style = 'italic' }
+    plugins.NvimTreeNormal = { fg = c.fg, bg = c.bg }
+    plugins.StartifyFile   = { fg = c.fg, bg = c.bg }
+    plugins.StartifyFooter = { fg = c.fg, bg = c.bg }
+    plugins.StartifySlash  = { fg = c.fg, bg = c.bg }
+    plugins.StartifyPath   = { fg = c.entity, bg = c.bg, style = 'italic' }
   end
 
   return plugins
