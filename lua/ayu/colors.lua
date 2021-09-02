@@ -1,6 +1,7 @@
-local utils = require'ayu.utils'
+local utils   = require'ayu.utils'
+local options = require'ayu.config'.options
 
-local colors = {
+local c = {
   white = '#ffffff',
   black = '#000000',
   none  = 'NONE',
@@ -11,149 +12,154 @@ if vim.o.background == 'dark' then
   if vim.g.ayu_mirage then
     -- MIRAGE: {{{2
     -- basics
-    colors.accent             = '#ffcc66'
-    colors.bg                 = '#212733'
-    colors.fg                 = '#d9d7ce'
-    colors.fg_idle            = '#607080'
+    c.accent             = '#ffcc66'
+    c.bg                 = '#212733'
+    c.fg                 = '#d9d7ce'
+    c.fg_idle            = '#607080'
     -- editor
-    colors.comment            = '#5c6773'
-    colors.constant           = '#d4bfff'
-    colors.entity             = '#73d0ff'
-    colors.error              = '#ff3333'
-    colors.func               = '#ffd57f'
-    colors.keyword            = '#ffae57'
-    colors.line               = '#242b38'
-    colors.markup             = '#f07178'
-    colors.operator           = '#80d4ff'
-    colors.regexp             = '#95e6cb'
-    colors.special            = '#ffc44c'
-    colors.string             = '#bbe67e'
-    colors.tag                = '#5ccfe6'
-    colors.ui                 = '#707a8c'
-    colors.warning            = '#ffa759'
+    c.comment            = '#5c6773'
+    c.constant           = '#d4bfff'
+    c.entity             = '#73d0ff'
+    c.error              = '#ff3333'
+    c.func               = '#ffd57f'
+    c.keyword            = '#ffae57'
+    c.line               = '#242b38'
+    c.markup             = '#f07178'
+    c.operator           = '#80d4ff'
+    c.regexp             = '#95e6cb'
+    c.special            = '#ffc44c'
+    c.string             = '#bbe67e'
+    c.tag                = '#5ccfe6'
+    c.ui                 = '#707a8c'
+    c.warning            = '#ffa759'
     -- gui
-    colors.guide_active       = '#576070'
-    colors.guide_normal       = '#3d4751'
-    colors.gutter_active      = '#5f687a'
-    colors.gutter_normal      = '#404755'
-    colors.panel_bg           = '#272d38'
-    colors.panel_border       = '#101521'
-    colors.panel_shadow       = '#141925'
-    colors.selection_bg       = '#33415e'
-    colors.selection_border   = '#232a4c'
-    colors.selection_inactive = '#343f4c'
+    c.guide_active       = '#576070'
+    c.guide_normal       = '#3d4751'
+    c.gutter_active      = '#5f687a'
+    c.gutter_normal      = '#404755'
+    c.panel_bg           = '#272d38'
+    c.panel_border       = '#101521'
+    c.panel_shadow       = '#141925'
+    c.selection_bg       = '#33415e'
+    c.selection_border   = '#232a4c'
+    c.selection_inactive = '#343f4c'
     -- vcs
-    colors.vcs_added          = '#a6cc70'
-    colors.vcs_added_bg       = '#313d37'
-    colors.vcs_diff_text      = '#465742'
-    colors.vcs_modified       = '#77a8d9'
-    colors.vcs_modified_bg    = '#323a4c'
-    colors.vcs_removed        = '#f27983'
-    colors.vcs_removed_bg     = '#3e373a'
+    c.vcs_added          = '#a6cc70'
+    c.vcs_added_bg       = '#313d37'
+    c.vcs_diff_text      = '#465742'
+    c.vcs_modified       = '#77a8d9'
+    c.vcs_modified_bg    = '#323a4c'
+    c.vcs_removed        = '#f27983'
+    c.vcs_removed_bg     = '#3e373a'
     -- }}}
   else
     -- DARK: {{{2
     -- basics
-    colors.accent             = '#f29718'
-    colors.bg                 = '#0f1419'
-    colors.fg                 = '#e6e1cf'
-    colors.fg_idle            = '#3e4b59'
+    c.accent             = '#f29718'
+    c.bg                 = '#0f1419'
+    c.fg                 = '#e6e1cf'
+    c.fg_idle            = '#3e4b59'
     -- editor
-    colors.comment            = '#5c6773'
-    colors.constant           = '#ffee99'
-    colors.entity             = '#59c2ff'
-    colors.error              = '#ff3333'
-    colors.func               = '#ffb454'
-    colors.keyword            = '#ff7733'
-    colors.line               = '#151a1e'
-    colors.markup             = '#f07178'
-    colors.operator           = '#e7c547'
-    colors.regexp             = '#95e6cb'
-    colors.special            = '#e6b673'
-    colors.string             = '#b8cc52'
-    colors.tag                = '#36a3d9'
-    colors.ui                 = '#4d5566'
-    colors.warning            = '#ff8f40'
+    c.comment            = '#5c6773'
+    c.constant           = '#ffee99'
+    c.entity             = '#59c2ff'
+    c.error              = '#ff3333'
+    c.func               = '#ffb454'
+    c.keyword            = '#ff7733'
+    c.line               = '#151a1e'
+    c.markup             = '#f07178'
+    c.operator           = '#e7c547'
+    c.regexp             = '#95e6cb'
+    c.special            = '#e6b673'
+    c.string             = '#b8cc52'
+    c.tag                = '#36a3d9'
+    c.ui                 = '#4d5566'
+    c.warning            = '#ff8f40'
     -- gui
-    colors.guide_active       = '#393f4d'
-    colors.guide_normal       = '#2d3640'
-    colors.gutter_active      = '#464d5e'
-    colors.gutter_normal      = '#323945'
-    colors.panel_bg           = '#14191f'
-    colors.panel_border       = '#000000'
-    colors.panel_shadow       = '#00010a'
-    colors.selection_bg       = '#273747'
-    colors.selection_border   = '#304357'
-    colors.selection_inactive = '#253340'
+    c.guide_active       = '#393f4d'
+    c.guide_normal       = '#2d3640'
+    c.gutter_active      = '#464d5e'
+    c.gutter_normal      = '#323945'
+    c.panel_bg           = '#14191f'
+    c.panel_border       = '#000000'
+    c.panel_shadow       = '#00010a'
+    c.selection_bg       = '#273747'
+    c.selection_border   = '#304357'
+    c.selection_inactive = '#253340'
     -- vcs
-    colors.vcs_added          = '#91b362'
-    colors.vcs_added_bg       = '#1d2214'
-    colors.vcs_diff_text      = '#363e1c'
-    colors.vcs_modified       = '#6994bf'
-    colors.vcs_modified_bg    = '#1b2733'
-    colors.vcs_removed        = '#d96c75'
-    colors.vcs_removed_bg     = '#2d2220'
+    c.vcs_added          = '#91b362'
+    c.vcs_added_bg       = '#1d2214'
+    c.vcs_diff_text      = '#363e1c'
+    c.vcs_modified       = '#6994bf'
+    c.vcs_modified_bg    = '#1b2733'
+    c.vcs_removed        = '#d96c75'
+    c.vcs_removed_bg     = '#2d2220'
     -- }}}
   end
-
--- CONTRAST: sidebars, floating windows and popup menus {{{2
-if vim.g.ayu_contrast then
-  local contrast_amount = vim.g.ayu_contrast_amount
-    and vim.g.ayu_contrast_amount or -30
-  colors.sidebar = utils.shade(colors.bg, contrast_amount)
-  colors.float   = utils.shade(colors.bg, contrast_amount)
-else
-  colors.sidebar = colors.bg
-  colors.float   = colors.bg
-end
--- }}}
-
+  -- CONTRAST: sidebars, floating windows and popup menus {{{2
+  if options.contrast.dark.enabled then
+    c.sidebar = utils.shade(c.bg, options.contrast.dark.amount)
+    c.float   = utils.shade(c.bg, options.contrast.dark.amount)
+  else
+    c.sidebar = c.bg
+    c.float   = c.bg
+  end
+  -- }}}
 else
   -- LIGHT: {{{2
   -- basics
-  colors.accent             = '#ff6a00'
-  colors.bg                 = '#fafafa'
-  colors.fg                 = '#5c6773'
-  colors.fg_idle            = '#828c99'
+  c.accent             = '#ff6a00'
+  c.bg                 = '#fafafa'
+  c.fg                 = '#5c6773'
+  c.fg_idle            = '#828c99'
   -- editor
-  colors.comment            = '#abb0b6'
-  colors.constant           = '#a37acc'
-  colors.entity             = '#399ee6'
-  colors.error              = '#ff3333'
-  colors.func               = '#f29718'
-  colors.keyword            = '#ff7733'
-  colors.line               = '#f3f3f3'
-  colors.markup             = '#f07178'
-  colors.operator           = '#e7c547'
-  colors.regexp             = '#4cbf99'
-  colors.special            = '#e6b673'
-  colors.string             = '#86b300'
-  colors.tag                = '#36a3d9'
-  colors.ui                 = '#8a9199'
-  colors.warning            = '#fa8d3e'
+  c.comment            = '#abb0b6'
+  c.constant           = '#a37acc'
+  c.entity             = '#399ee6'
+  c.error              = '#ff3333'
+  c.func               = '#f29718'
+  c.keyword            = '#ff7733'
+  c.line               = '#f3f3f3'
+  c.markup             = '#f07178'
+  c.operator           = '#e7c547'
+  c.regexp             = '#4cbf99'
+  c.special            = '#e6b673'
+  c.string             = '#86b300'
+  c.tag                = '#36a3d9'
+  c.ui                 = '#8a9199'
+  c.warning            = '#fa8d3e'
   -- gui
-  colors.guide_active       = '#d3d5d8'
-  colors.guide_normal       = '#d9d8d7'
-  colors.gutter_active      = '#a0a6ac'
-  colors.gutter_normal      = '#cdd0d3'
-  colors.panel_bg           = '#ffffff'
-  colors.panel_border       = '#f0f0f0'
-  colors.panel_shadow       = '#ccced0'
-  colors.selection_bg       = '#d1e4f4'
-  colors.selection_border   = '#e1e1e2'
-  colors.selection_inactive = '#f0eee4'
+  c.guide_active       = '#d3d5d8'
+  c.guide_normal       = '#d9d8d7'
+  c.gutter_active      = '#a0a6ac'
+  c.gutter_normal      = '#cdd0d3'
+  c.panel_bg           = '#ffffff'
+  c.panel_border       = '#f0f0f0'
+  c.panel_shadow       = '#ccced0'
+  c.selection_bg       = '#d1e4f4'
+  c.selection_border   = '#e1e1e2'
+  c.selection_inactive = '#f0eee4'
   -- vcs
-  colors.vcs_added          = '#99bf4d'
-  colors.vcs_added_bg       = '#e0e7cd'
-  colors.vcs_diff_text      = '#d3e0af'
-  colors.vcs_modified       = '#709ecc'
-  colors.vcs_modified_bg    = '#e7e8e9'
-  colors.vcs_removed        = '#f27983'
-  colors.vcs_removed_bg     = '#f9ebe4'
+  c.vcs_added          = '#99bf4d'
+  c.vcs_added_bg       = '#e0e7cd'
+  c.vcs_diff_text      = '#d3e0af'
+  c.vcs_modified       = '#709ecc'
+  c.vcs_modified_bg    = '#e7e8e9'
+  c.vcs_removed        = '#f27983'
+  c.vcs_removed_bg     = '#f9ebe4'
+  -- }}}
+  -- CONTRAST: sidebars, floating windows and popup menus {{{2
+  if options.contrast.light.enabled then
+    c.sidebar = utils.shade(c.bg, options.contrast.light.amount)
+    c.float   = utils.shade(c.bg, options.contrast.light.amount)
+  else
+    c.sidebar = c.bg
+    c.float   = c.bg
+  end
   -- }}}
 end
 -- }}}
 
-return colors
+return c
 
 -- vim:fdm=marker

@@ -1,83 +1,106 @@
-local colors = require'ayu.colors'
+local c = require'ayu.colors'
+local options = require'ayu.config'.options
 
 local ayu = {}
 
 -- SYNTAX: {{{1
 ayu.define_syntax = function ()
-  -- FIXED: {{{2
+  -- Fixed: {{{2
   local syntax = {
     -- Basics {{{3
-    Boolean             = { fg = colors.markup },
-    Conditional         = { fg = colors.keyword },
-    Constant            = { fg = colors.constant },
-    Debug               = { fg = colors.accent },
-    Define              = { fg = colors.keyword },
-    Delimiter           = { fg = colors.special },
-    Error               = { fg = colors.error, sp = 'underline' },
-    Exception           = { fg = colors.markup },
-    Float               = { fg = colors.markup },
-    Function            = { fg = colors.func },
-    Identifier          = { fg = colors.entity },
-    Ignore              = { fg = colors.fg },
-    Include             = { fg = colors.func },
-    Keyword             = { fg = colors.keyword },
-    Label               = { fg = colors.keyword },
-    Macro               = { fg = colors.special },
-    Number              = { fg = colors.markup },
-    Operator            = { fg = colors.operator },
-    PreCondit           = { fg = colors.special },
-    PreProc             = { fg = colors.accent },
-    Repeat              = { fg = colors.keyword },
-    Special             = { fg = colors.accent },
-    SpecialChar         = { fg = colors.keyword },
-    SpecialComment      = { fg = colors.entity },
-    Statement           = { fg = colors.keyword },
-    StorageClass        = { fg = colors.special },
-    Structure           = { fg = colors.special },
-    Tag                 = { fg = colors.accent },
-    Todo                = { fg = colors.markup, style = 'bold,italic' },
-    Type                = { fg = colors.entity },
-    Typedef             = { fg = colors.accent },
-    Underlined          = { fg = colors.tag, sp = colors.tag, style = 'underline' },
+    Boolean             = { fg = c.markup },
+    Constant            = { fg = c.constant },
+    Debug               = { fg = c.accent },
+    Define              = { fg = c.keyword },
+    Delimiter           = { fg = c.special },
+    Error               = { fg = c.error, sp = 'underline' },
+    Exception           = { fg = c.markup },
+    Float               = { fg = c.markup },
+    Ignore              = { fg = c.fg },
+    Include             = { fg = c.func },
+    Label               = { fg = c.keyword },
+    Macro               = { fg = c.special },
+    Number              = { fg = c.markup },
+    Operator            = { fg = c.operator },
+    PreCondit           = { fg = c.special },
+    PreProc             = { fg = c.accent },
+    Special             = { fg = c.accent },
+    SpecialChar         = { fg = c.keyword },
+    SpecialComment      = { fg = c.entity },
+    Statement           = { fg = c.keyword },
+    StorageClass        = { fg = c.special },
+    Structure           = { fg = c.special },
+    Tag                 = { fg = c.accent },
+    Todo                = { fg = c.markup, style = 'bold,italic' },
+    Type                = { fg = c.entity },
+    Typedef             = { fg = c.accent },
+    Underlined          = { fg = c.tag, style = 'underline', sp = c.tag },
     -- }}}
 
     -- Languages {{{3
-    htmlLink            = { fg = colors.tag,      style = "underline" },
-    htmlH1              = { fg = colors.special,  style = "bold" },
-    htmlH2              = { fg = colors.accent,   style = "bold" },
-    htmlH3              = { fg = colors.string,   style = "bold" },
-    htmlH4              = { fg = colors.constant, style = "bold" },
-    htmlH5              = { fg = colors.keyword,  style = "bold" },
+    htmlLink            = { fg = c.tag,      style = "underline" },
+    htmlH1              = { fg = c.special,  style = "bold" },
+    htmlH2              = { fg = c.accent,   style = "bold" },
+    htmlH3              = { fg = c.string,   style = "bold" },
+    htmlH4              = { fg = c.constant, style = "bold" },
+    htmlH5              = { fg = c.keyword,  style = "bold" },
 
-    markdownH1          = { fg = colors.special,  style = "bold,italic" },
-    markdownH2          = { fg = colors.accent,   style = "bold" },
-    markdownH3          = { fg = colors.string,   style = "bold" },
-    markdownH4          = { fg = colors.tag,      style = "bold" },
-    markdownCode        = { bg = colors.panel_bg, style = "italic" },
-    markdownCodeBlock   = { bg = colors.panel_bg, style = "italic" },
-    markdownH1Delimiter = { fg = colors.special },
-    markdownH2Delimiter = { fg = colors.accent },
-    markdownH3Delimiter = { fg = colors.string },
-    markdownH4Delimiter = { fg = colors.tag },
+    markdownH1          = { fg = c.special,  style = "bold,italic" },
+    markdownH2          = { fg = c.accent,   style = "bold" },
+    markdownH3          = { fg = c.string,   style = "bold" },
+    markdownH4          = { fg = c.tag,      style = "bold" },
+    markdownCode        = { bg = c.panel_bg, style = "italic" },
+    markdownCodeBlock   = { bg = c.panel_bg, style = "italic" },
+    markdownH1Delimiter = { fg = c.special },
+    markdownH2Delimiter = { fg = c.accent },
+    markdownH3Delimiter = { fg = c.string },
+    markdownH4Delimiter = { fg = c.tag },
     -- }}}
   }
   -- }}}
 
-  -- OPTIONS: {{{2
-  -- Italicize comments
-  if vim.g.ayu_italic_comments then
-    syntax.Comment = { fg = colors.comment, style = 'italic' }
+  -- Options: {{{2
+  -- Italicize comments {{{3
+  if options.italics.comments then
+    syntax.Comment = { fg = c.comment, style = 'italic' }
   else
-    syntax.Comment = { fg = colors.comment }
+    syntax.Comment = { fg = c.comment }
   end
-  -- Italicize string and characters
-  if vim.g.ayu_italic_strings then
-    syntax.String     = { fg = colors.string, style = 'italic' }
-    syntax.Character  = { fg = colors.markup, style = 'italic' }
+  -- }}}
+  -- Italicize string and characters {{{3
+  if options.italics.strings then
+    syntax.String     = { fg = c.string, style = 'italic' }
+    syntax.Character  = { fg = c.markup, style = 'italic' }
   else
-    syntax.String     = { fg = colors.string }
-    syntax.Character  = { fg = colors.markup }
+    syntax.String     = { fg = c.string }
+    syntax.Character  = { fg = c.markup }
   end
+  -- }}}
+  -- Italicize keywords {{{3
+  if options.italics.keywords then
+    syntax.Conditional = { fg = c.keyword, style = 'italic' }
+    syntax.Keyword     = { fg = c.keyword, style = 'italic' }
+    syntax.Repeat      = { fg = c.keyword, style = 'italic' }
+  else
+    syntax.Conditional = { fg = c.keyword }
+    syntax.Keyword     = { fg = c.keyword }
+    syntax.Repeat      = { fg = c.keyword }
+  end
+  -- }}}
+  -- Italicize functions {{{3
+  if options.italics.functions then
+    syntax.Function = { fg = c.func, style = 'italic' }
+  else
+    syntax.Function = { fg = c.func }
+  end
+  -- }}}
+  -- Italicize variables {{{3
+  if options.italics.variables then
+    syntax.Identifier = { fg = c.entity, style = 'italic' }
+  else
+    syntax.Identifier = { fg = c.entity }
+  end
+  -- }}}
   -- }}}
 
   return syntax
@@ -86,76 +109,76 @@ end
 
 -- EDITOR: {{{1
 ayu.define_editor = function ()
-  -- FIXED: {{{2
+  -- Fixed: {{{2
   local editor = {
-    ColorColumn       = { bg = colors.line },
-    Conceal           = { fg = colors.comment },
-    CursorColumn      = { bg = colors.line },
-    CursorLine        = { bg = colors.line },
-    CursorLineConceal = { fg = colors.guide_normal, bg = colors.line },
-    CursorLineNr      = { fg = colors.accent, bg = colors.line },
-    DiffAdd           = { bg = colors.vcs_added_bg },
-    DiffAdded         = { fg = colors.vcs_added },
-    DiffChange        = { bg = colors.vcs_modified_bg },
-    DiffDelete        = { bg = colors.vcs_removed_bg },
-    DiffRemoved       = { fg = colors.vcs_removed },
-    DiffText          = { bg = colors.vcs_diff_text },
-    Directory         = { fg = colors.func },
-    ErrorMsg          = { fg = colors.white, bg = colors.error, style = 'standout' },
-    FoldColumn        = { bg = colors.bg },
-    Folded            = { fg = colors.fg_idle, bg = colors.panel_bg },
-    IncSearch         = { fg = colors.keyword, bg = colors.ui },
-    LineNr            = { fg = colors.guide_normal },
-    MatchParen        = { style = 'underline', sp = colors.func },
-    ModeMsg           = { fg = colors.string },
-    MoreMsg           = { fg = colors.string },
-    NonText           = { fg = colors.guide_normal },
-    NormalFloat       = { fg = colors.fg,      bg = colors.float },
-    Pmenu             = { fg = colors.fg,      bg = colors.selection_inactive },
-    PmenuSbar         = { fg = colors.accent,  bg = colors.selection_inactive },
-    PmenuSel          = { fg = colors.accent,  bg = colors.selection_inactive, style = 'reverse' },
-    PmenuThumb        = { fg = colors.fg,      bg = colors.accent },
-    Question          = { fg = colors.string },
-    QuickFixLine      = { fg = colors.special, bg = colors.guide_normal },
-    Search            = { fg = colors.bg,      bg = colors.constant },
-    SpecialKey        = { fg = colors.selection_inactive },
-    SpellBad          = { style = 'undercurl', sp = colors.error },
-    SpellCap          = { style = 'undercurl', sp = colors.tag },
-    SpellLocal        = { style = 'undercurl', sp = colors.keyword },
-    SpellRare         = { style = 'undercurl', sp = colors.regexp },
-    StatusLine        = { fg = colors.fg,      bg = colors.panel_bg },
-    StatusLineNC      = { fg = colors.fg_idle, bg = colors.panel_bg },
-    StatusLineTerm    = { fg = colors.fg,      bg = colors.panel_bg },
-    StatusLineTermNC  = { fg = colors.fg_idle, bg = colors.panel_bg },
-    TabLine           = { fg = colors.comment, bg = colors.panel_shadow },
-    TabLineFill       = { fg = colors.fg,      bg = colors.panel_border },
-    TabLineSel        = { fg = colors.fg,      bg = colors.bg },
-    Title             = { fg = colors.keyword },
-    Visual            = { bg = colors.selection_inactive },
-    VisualNOS         = { bg = colors.selection },
-    WarningMsg        = { fg = colors.warning },
-    WildMenu          = { fg = colors.fg, bg = colors.markup },
-    healthError       = { fg = colors.error },
-    healthSuccess     = { fg = colors.string },
-    healthWarning     = { fg = colors.warning },
-    qfLineNr          = { fg = colors.keyword },
-  -- }}}
+    ColorColumn       = { bg = c.line },
+    Conceal           = { fg = c.comment },
+    CursorColumn      = { bg = c.line },
+    CursorLine        = { bg = c.line },
+    CursorLineConceal = { fg = c.guide_normal, bg = c.line },
+    CursorLineNr      = { fg = c.accent, bg = c.line },
+    DiffAdd           = { bg = c.vcs_added_bg },
+    DiffAdded         = { fg = c.vcs_added },
+    DiffChange        = { bg = c.vcs_modified_bg },
+    DiffDelete        = { bg = c.vcs_removed_bg },
+    DiffRemoved       = { fg = c.vcs_removed },
+    DiffText          = { bg = c.vcs_diff_text },
+    Directory         = { fg = c.func },
+    ErrorMsg          = { fg = c.white, bg = c.error, style = 'standout' },
+    FoldColumn        = { bg = c.bg },
+    Folded            = { fg = c.fg_idle, bg = c.panel_bg },
+    IncSearch         = { fg = c.keyword, bg = c.ui },
+    LineNr            = { fg = c.guide_normal },
+    MatchParen        = { style = 'underline', sp = c.func },
+    ModeMsg           = { fg = c.string },
+    MoreMsg           = { fg = c.string },
+    NonText           = { fg = c.guide_normal },
+    NormalFloat       = { fg = c.fg,      bg = c.float },
+    Pmenu             = { fg = c.fg,      bg = c.selection_inactive },
+    PmenuSbar         = { fg = c.accent,  bg = c.selection_inactive },
+    PmenuSel          = { fg = c.accent,  bg = c.selection_inactive, style = 'reverse' },
+    PmenuThumb        = { fg = c.fg,      bg = c.accent },
+    Question          = { fg = c.string },
+    QuickFixLine      = { fg = c.special, bg = c.guide_normal },
+    Search            = { fg = c.bg,      bg = c.constant },
+    SpecialKey        = { fg = c.selection_inactive },
+    SpellBad          = { style = 'undercurl', sp = c.error },
+    SpellCap          = { style = 'undercurl', sp = c.tag },
+    SpellLocal        = { style = 'undercurl', sp = c.keyword },
+    SpellRare         = { style = 'undercurl', sp = c.regexp },
+    StatusLine        = { fg = c.fg,      bg = c.panel_bg },
+    StatusLineNC      = { fg = c.fg_idle, bg = c.panel_bg },
+    StatusLineTerm    = { fg = c.fg,      bg = c.panel_bg },
+    StatusLineTermNC  = { fg = c.fg_idle, bg = c.panel_bg },
+    TabLine           = { fg = c.comment, bg = c.panel_shadow },
+    TabLineFill       = { fg = c.fg,      bg = c.panel_border },
+    TabLineSel        = { fg = c.fg,      bg = c.bg },
+    Title             = { fg = c.keyword },
+    Visual            = { bg = c.selection_inactive },
+    VisualNOS         = { bg = c.selection },
+    WarningMsg        = { fg = c.warning },
+    WildMenu          = { fg = c.fg, bg = c.markup },
+    healthError       = { fg = c.error },
+    healthSuccess     = { fg = c.string },
+    healthWarning     = { fg = c.warning },
+    qfLineNr          = { fg = c.keyword },
   }
+  -- }}}
 
-  -- OPTIONS: {{{2
+  -- Options: {{{2
   --Set transparent background
-  if vim.g.ayu_disable_bg then
-    editor.Normal     = { fg = colors.fg, bg = colors.none }
-    editor.SignColumn = { fg = colors.fg, bg = colors.none }
+  if options.disable.background then
+    editor.Normal     = { fg = c.fg, bg = c.none }
+    editor.SignColumn = { fg = c.fg, bg = c.none }
   else
-    editor.Normal     = { fg = colors.fg, bg = colors.bg }
-    editor.SignColumn = { fg = colors.fg, bg = colors.bg }
+    editor.Normal     = { fg = c.fg, bg = c.bg }
+    editor.SignColumn = { fg = c.fg, bg = c.bg }
   end
   -- Remove window split borders
-  if vim.g.ayu_borders then
-    editor.VertSplit = { fg = colors.panel_border, bg = colors.bg }
+  if options.borders then
+    editor.VertSplit = { fg = c.panel_border, bg = c.bg }
   else
-    editor.VertSplit = { fg = colors.bg, bg = colors.none }
+    editor.VertSplit = { fg = c.bg, bg = c.none }
   end
   -- }}}
 
@@ -165,107 +188,133 @@ end
 
 -- TERMINAL: {{{1
 ayu.define_terminal = function ()
-  vim.g.terminal_color_0  = colors.bg
-  vim.g.terminal_color_1  = colors.markup
-  vim.g.terminal_color_2  = colors.string
-  vim.g.terminal_color_3  = colors.accent
-  vim.g.terminal_color_4  = colors.tag
-  vim.g.terminal_color_5  = colors.constant
-  vim.g.terminal_color_6  = colors.regexp
-  vim.g.terminal_color_7  = colors.black
-  vim.g.terminal_color_8  = colors.fg_idle
-  vim.g.terminal_color_9  = colors.error
-  vim.g.terminal_color_10 = colors.string
-  vim.g.terminal_color_11 = colors.accent
-  vim.g.terminal_color_12 = colors.tag
-  vim.g.terminal_color_13 = colors.constant
-  vim.g.terminal_color_14 = colors.regexp
-  vim.g.terminal_color_15 = colors.comment
+  vim.g.terminal_color_0  = c.bg
+  vim.g.terminal_color_1  = c.markup
+  vim.g.terminal_color_2  = c.string
+  vim.g.terminal_color_3  = c.accent
+  vim.g.terminal_color_4  = c.tag
+  vim.g.terminal_color_5  = c.constant
+  vim.g.terminal_color_6  = c.regexp
+  vim.g.terminal_color_7  = c.black
+  vim.g.terminal_color_8  = c.fg_idle
+  vim.g.terminal_color_9  = c.error
+  vim.g.terminal_color_10 = c.string
+  vim.g.terminal_color_11 = c.accent
+  vim.g.terminal_color_12 = c.tag
+  vim.g.terminal_color_13 = c.constant
+  vim.g.terminal_color_14 = c.regexp
+  vim.g.terminal_color_15 = c.comment
 end
 -- }}}
 
 -- TREESITTER: {{{1
 ayu.define_treeSitter = function ()
-  -- FIXED: {{{2
-
+  -- Fixed: {{{2
   local treesitter = {
-    TSAnnotation         = { fg = colors.markup },
-    TSAttribute          = { fg = colors.accent },
-    TSBoolean            = { fg = colors.markup },
-    TSConditional        = { fg = colors.keyword, style = 'italic' },
-    TSConstBuiltin       = { fg = colors.entity },
-    TSConstMacro         = { fg = colors.func },
-    TSConstant           = { fg = colors.constant },
-    TSConstructor        = { fg = colors.entity },
-    TSDanger             = { fg = colors.error, style = 'standout' },
-    TSEmphasis           = { fg = colors.special, style = 'italic' },
-    TSEnvironmentName    = { fg = colors.keyword },
-    TSEnvironment        = { fg = colors.special, style = 'italic' },
-    TSError              = { fg = colors.error },
-    TSException          = { fg = colors.constant },
-    TSField              = { fg = colors.entity },
-    TSFloat              = { fg = colors.accent },
-    TSFuncBuiltin        = { fg = colors.special },
-    TSFuncMacro          = { fg = colors.entity },
-    TSFunction           = { fg = colors.func },
-    TSInclude            = { fg = colors.special, style = 'bold,italic' },
-    TSKeyword            = { fg = colors.keyword, style = 'bold,italic' },
-    TSKeywordOperator    = { fg = colors.regexp },
-    TSKeywordReturn      = { fg = colors.entity, style = 'bold,italic' },
-    TSKeywordFunction    = { fg = colors.func },
-    TSLabel              = { fg = colors.accent, style = 'italic' },
-    TSLiteral            = { fg = colors.fg },
-    TSMath               = { fg = colors.operator },
-    TSMethod             = { fg = colors.func },
-    TSNamespace          = { fg = colors.constant },
-    TSNone               = { fg = colors.fg },
-    TSNote               = { fg = colors.comment },
-    TSNumber             = { fg = colors.markup },
-    TSOperator           = { fg = colors.special },
-    TSParameter          = { fg = colors.tag, style = 'italic' },
-    TSParameterReference = { fg = colors.tag },
-    TSProperty           = { fg = colors.tag },
-    TSPunctBracket       = { fg = colors.special },
-    TSPunctDelimiter     = { fg = colors.special },
-    TSPunctSpecial       = { fg = colors.special },
-    TSRepeat             = { fg = colors.keyword, style = 'italic' },
-    TSStrike             = { fg = colors.fg, style = 'strikethrough' },
-    TSStrong             = { fg = colors.fg,  style = 'bold' },
-    TSSymbol             = { fg = colors.constant },
-    TSTag                = { fg = colors.accent },
-    TSTagDelimiter       = { fg = colors.constant },
-    TSText               = { fg = colors.fg },
-    TSTextReference      = { fg = colors.constant },
-    TSTitle              = { fg = colors.ui, style = 'bold' },
-    TSType               = { fg = colors.keyword },
-    TSTypeBuiltin        = { fg = colors.keyword },
-    TSURI                = { fg = colors.tag },
-    TSUnderline          = { sp = colors.tag, style = 'underline' },
-    TSWarning            = { fg = colors.warning },
-    TSVariable           = { fg = colors.operator },
-    TSVariableBuiltin    = { fg = colors.operator },
+    TSAnnotation         = { fg = c.markup },
+    TSAttribute          = { fg = c.accent },
+    TSBoolean            = { fg = c.markup },
+    TSConstBuiltin       = { fg = c.entity },
+    TSConstMacro         = { fg = c.func },
+    TSConstant           = { fg = c.constant },
+    TSConstructor        = { fg = c.entity },
+    TSDanger             = { fg = c.error, style = 'standout' },
+    TSEmphasis           = { fg = c.special, style = 'italic' },
+    TSEnvironmentName    = { fg = c.keyword },
+    TSEnvironment        = { fg = c.special, style = 'italic' },
+    TSError              = { fg = c.error },
+    TSException          = { fg = c.constant },
+    TSField              = { fg = c.entity },
+    TSFloat              = { fg = c.accent },
+    TSFuncMacro          = { fg = c.entity },
+    TSInclude            = { fg = c.special, style = 'bold,italic' },
+    TSKeywordOperator    = { fg = c.regexp },
+    TSKeywordReturn      = { fg = c.entity, style = 'bold,italic' },
+    TSLabel              = { fg = c.accent, style = 'italic' },
+    TSLiteral            = { fg = c.fg },
+    TSMath               = { fg = c.operator },
+    TSNamespace          = { fg = c.constant },
+    TSNone               = { fg = c.fg },
+    TSNote               = { fg = c.comment },
+    TSNumber             = { fg = c.markup },
+    TSOperator           = { fg = c.special },
+    TSParameter          = { fg = c.tag, style = 'italic' },
+    TSParameterReference = { fg = c.tag },
+    TSProperty           = { fg = c.tag },
+    TSPunctBracket       = { fg = c.special },
+    TSPunctDelimiter     = { fg = c.special },
+    TSPunctSpecial       = { fg = c.special },
+    TSStrike             = { fg = c.fg, style = 'strikethrough' },
+    TSStrong             = { fg = c.fg,  style = 'bold' },
+    TSSymbol             = { fg = c.constant },
+    TSTag                = { fg = c.accent },
+    TSTagDelimiter       = { fg = c.constant },
+    TSText               = { fg = c.fg },
+    TSTextReference      = { fg = c.constant },
+    TSTitle              = { fg = c.ui, style = 'bold' },
+    TSType               = { fg = c.keyword },
+    TSTypeBuiltin        = { fg = c.keyword },
+    TSURI                = { fg = c.tag },
+    TSUnderline          = { sp = c.tag, style = 'underline' },
+    TSWarning            = { fg = c.warning },
   }
   -- }}}
 
-  -- OPTIONS: {{{2
-  -- Italicize comments
-  if vim.g.ayu_italic_comments then
-    treesitter.TSComment = { fg = colors.comment , bg = colors.none, style = 'italic' }
+  -- Options: {{{2
+  -- Italicize comments {{{3
+  if options.italics.comments then
+    treesitter.TSComment = { fg = c.comment , bg = c.none, style = 'italic' }
   else
-    treesitter.TSComment = { fg = colors.comment }
+    treesitter.TSComment = { fg = c.comment }
   end
-  -- Italicize string and characters
-  if vim.g.ayu_italic_strings then
-    treesitter.TSCharacter    = { fg = colors.markup, style = 'italic' }
-    treesitter.TSString       = { fg = colors.string, style = 'italic' }
-    treesitter.TSStringEscape = { fg = colors.fg, style = 'italic' }
-    treesitter.TSStringRegex  = { fg = colors.func, style = 'italic' }
+  -- }}}
+  -- Italicize string and characters {{{3
+  if options.italics.strings then
+    treesitter.TSCharacter    = { fg = c.markup, style = 'italic' }
+    treesitter.TSString       = { fg = c.string, style = 'italic' }
+    treesitter.TSStringEscape = { fg = c.fg,     style = 'italic' }
+    treesitter.TSStringRegex  = { fg = c.func,   style = 'italic' }
   else
-    treesitter.TSCharacter    = { fg = colors.markup }
-    treesitter.TSString       = { fg = colors.string }
-    treesitter.TSStringEscape = { fg = colors.fg }
-    treesitter.TSStringRegex  = { fg = colors.func }
+    treesitter.TSCharacter    = { fg = c.markup }
+    treesitter.TSString       = { fg = c.string }
+    treesitter.TSStringEscape = { fg = c.fg }
+    treesitter.TSStringRegex  = { fg = c.func }
   end
+  -- }}}
+  -- Italicize keywords {{{3
+  if options.italics.keywords then
+    treesitter.TSConditional     = { fg = c.keyword, style = 'italic' }
+    treesitter.TSKeyword         = { fg = c.keyword, style = 'bold,italic' }
+    treesitter.TSKeywordFunction = { fg = c.func,    style = 'italic' }
+    treesitter.TSRepeat          = { fg = c.keyword, style = 'italic' }
+  else
+    treesitter.TSConditional     = { fg = c.keyword }
+    treesitter.TSKeyword         = { fg = c.keyword, style = 'bold' }
+    treesitter.TSKeywordFunction = { fg = c.func }
+    treesitter.TSRepeat          = { fg = c.keyword }
+  end
+
+  -- }}}
+  -- Italicize functions {{{3
+  if options.italics.functions then
+    treesitter.TSFuncBuiltin = { fg = c.special, style = 'italic' }
+    treesitter.TSFunction    = { fg = c.func,    style = 'italic' }
+    treesitter.TSMethod      = { fg = c.func,    style = 'italic' }
+  else
+    treesitter.TSFuncBuiltin = { fg = c.special }
+    treesitter.TSFunction    = { fg = c.func }
+    treesitter.TSMethod      = { fg = c.func }
+  end
+  -- }}}
+  -- Italicize variables {{{3
+  if options.italics.variables then
+    treesitter.TSVariable        = { fg = c.operator, style = 'italic' }
+    treesitter.TSVariableBuiltin = { fg = c.operator, style = 'italic' }
+  else
+    treesitter.TSVariable        = { fg = c.operator }
+    treesitter.TSVariableBuiltin = { fg = c.operator }
+  end
+  -- }}}
   -- }}}
 
   return treesitter
@@ -275,34 +324,34 @@ end
 -- LSP: {{{1
 ayu.define_LSP = function ()
   local lsp = {
-    LspCodeLens                          = { fg = colors.comment },
-    LspDiagnosticsDefaultError           = { fg = colors.error },
-    LspDiagnosticsDefaultHint            = { fg = colors.regexp  },
-    LspDiagnosticsDefaultInformation     = { fg = colors.tag },
-    LspDiagnosticsDefaultWarning         = { fg = colors.keyword },
-    LspDiagnosticsError                  = { fg = colors.error },
-    LspDiagnosticsFloatingError          = { fg = colors.error },
-    LspDiagnosticsFloatingHint           = { fg = colors.regexp  },
-    LspDiagnosticsFloatingInformation    = { fg = colors.tag },
-    LspDiagnosticsFloatingWarning        = { fg = colors.keyword },
-    LspDiagnosticsHint                   = { fg = colors.keyword },
-    LspDiagnosticsInformation            = { fg = colors.tag },
-    LspDiagnosticsSignError              = { fg = colors.error },
-    LspDiagnosticsSignHint               = { fg = colors.regexp  },
-    LspDiagnosticsSignInformation        = { fg = colors.tag },
-    LspDiagnosticsSignWarning            = { fg = colors.keyword },
-    LspDiagnosticsUnderlineError         = { style = 'undercurl', sp = colors.error },
-    LspDiagnosticsUnderlineHint          = { style = 'undercurl', sp = colors.regexp },
-    LspDiagnosticsUnderlineInformation   = { style = 'undercurl', sp = colors.tag },
-    LspDiagnosticsUnderlineWarning       = { style = 'undercurl', sp = colors.keyword },
-    LspDiagnosticsVirtualTextError       = { fg = colors.error },
-    LspDiagnosticsVirtualTextHint        = { fg = colors.regexp },
-    LspDiagnosticsVirtualTextInformation = { fg = colors.tag },
-    LspDiagnosticsVirtualTextWarning     = { fg = colors.keyword },
-    LspDiagnosticsWarning                = { fg = colors.regexp },
-    LspReferenceRead                     = { fg = colors.accent, bg = colors.panel_bg },
-    LspReferenceText                     = { fg = colors.accent, bg = colors.panel_bg },
-    LspReferenceWrite                    = { fg = colors.accent, bg = colors.panel_bg },
+    LspCodeLens                          = { fg = c.comment },
+    LspDiagnosticsDefaultError           = { fg = c.error },
+    LspDiagnosticsDefaultHint            = { fg = c.regexp  },
+    LspDiagnosticsDefaultInformation     = { fg = c.tag },
+    LspDiagnosticsDefaultWarning         = { fg = c.keyword },
+    LspDiagnosticsError                  = { fg = c.error },
+    LspDiagnosticsFloatingError          = { fg = c.error },
+    LspDiagnosticsFloatingHint           = { fg = c.regexp  },
+    LspDiagnosticsFloatingInformation    = { fg = c.tag },
+    LspDiagnosticsFloatingWarning        = { fg = c.keyword },
+    LspDiagnosticsHint                   = { fg = c.keyword },
+    LspDiagnosticsInformation            = { fg = c.tag },
+    LspDiagnosticsSignError              = { fg = c.error },
+    LspDiagnosticsSignHint               = { fg = c.regexp  },
+    LspDiagnosticsSignInformation        = { fg = c.tag },
+    LspDiagnosticsSignWarning            = { fg = c.keyword },
+    LspDiagnosticsUnderlineError         = { style = 'undercurl', sp = c.error },
+    LspDiagnosticsUnderlineHint          = { style = 'undercurl', sp = c.regexp },
+    LspDiagnosticsUnderlineInformation   = { style = 'undercurl', sp = c.tag },
+    LspDiagnosticsUnderlineWarning       = { style = 'undercurl', sp = c.keyword },
+    LspDiagnosticsVirtualTextError       = { fg = c.error },
+    LspDiagnosticsVirtualTextHint        = { fg = c.regexp },
+    LspDiagnosticsVirtualTextInformation = { fg = c.tag },
+    LspDiagnosticsVirtualTextWarning     = { fg = c.keyword },
+    LspDiagnosticsWarning                = { fg = c.regexp },
+    LspReferenceRead                     = { fg = c.accent, bg = c.panel_bg },
+    LspReferenceText                     = { fg = c.accent, bg = c.panel_bg },
+    LspReferenceWrite                    = { fg = c.accent, bg = c.panel_bg },
   }
 
   return lsp
@@ -313,190 +362,190 @@ end
 ayu.define_plugins = function()
   local plugins = {
     -- BUFFERLINE: {{{2
-    BufferLineIndicatorSelected = { fg = colors.accent },
-    BufferLineFill              = { bg = colors.sidebar },
+    BufferLineIndicatorSelected = { fg = c.accent },
+    BufferLineFill              = { bg = c.sidebar },
     -- }}}
     -- CURSORWORD: {{{2
-    CursorWord  = { bg = colors.selection_inactive },
-    CursorWord0 = { bg = colors.selection_inactive },
-    CursorWord1 = { bg = colors.selection_inactive },
+    CursorWord  = { bg = c.selection_inactive },
+    CursorWord0 = { bg = c.selection_inactive },
+    CursorWord1 = { bg = c.selection_inactive },
     -- }}}
     -- COC: {{{2
-    CocCodeLens           = {fg = colors.comment },
-    CocDiagnosticsError   = {fg = colors.error },
-    CocDiagnosticsHint    = {fg = colors.blue },
-    CocDiagnosticsInfo    = {fg = colors.tag },
-    CocDiagnosticsWarning = {fg = colors.orange },
-    CocErrorFloat         = {fg = colors.error },
-    CocErrorHighlight     = {fg = colors.none, bg = colors.none, style = 'undercurl', sp = colors.error },
-    CocErrorSign          = {fg = colors.error },
-    CocHintFloat          = {fg = colors.regexp },
-    CocHintHighlight      = {fg = colors.none, bg = colors.none, style = 'undercurl', sp = colors.regexp },
-    CocHintSign           = {fg = colors.regexp },
-    CocInfoFloat          = {fg = colors.tag },
-    CocInfoHighlight      = {fg = colors.none, bg = colors.none, style = 'undercurl', sp = colors.tag },
-    CocInfoSign           = {fg = colors.tag },
-    CocSelectedText       = {fg = colors.red },
-    CocWarningFloat       = {fg = colors.warning },
-    CocWarningHighlight   = {fg = colors.none, bg = colors.none, style = 'undercurl', sp = colors.warning },
-    CocWarningSign        = {fg = colors.warning },
+    CocCodeLens           = {fg = c.comment },
+    CocDiagnosticsError   = {fg = c.error },
+    CocDiagnosticsHint    = {fg = c.blue },
+    CocDiagnosticsInfo    = {fg = c.tag },
+    CocDiagnosticsWarning = {fg = c.orange },
+    CocErrorFloat         = {fg = c.error },
+    CocErrorHighlight     = {fg = c.none, bg = c.none, style = 'undercurl', sp = c.error },
+    CocErrorSign          = {fg = c.error },
+    CocHintFloat          = {fg = c.regexp },
+    CocHintHighlight      = {fg = c.none, bg = c.none, style = 'undercurl', sp = c.regexp },
+    CocHintSign           = {fg = c.regexp },
+    CocInfoFloat          = {fg = c.tag },
+    CocInfoHighlight      = {fg = c.none, bg = c.none, style = 'undercurl', sp = c.tag },
+    CocInfoSign           = {fg = c.tag },
+    CocSelectedText       = {fg = c.red },
+    CocWarningFloat       = {fg = c.warning },
+    CocWarningHighlight   = {fg = c.none, bg = c.none, style = 'undercurl', sp = c.warning },
+    CocWarningSign        = {fg = c.warning },
     -- }}}
     -- DIFF: {{{2
-    diffAdded     = { fg = colors.vcs_added },
-    diffChanged   = { fg = colors.vcs_modified },
-    diffFile      = { fg = colors.guide_active },
-    diffIndexLine = { fg = colors.keyword },
-    diffLine      = { fg = colors.vcs_diff_text },
-    diffNewFile   = { fg = colors.ui },
-    diffOldFile   = { fg = colors.guide_normal },
-    diffRemoved   = { fg = colors.vcs_removed },
+    diffAdded     = { fg = c.vcs_added },
+    diffChanged   = { fg = c.vcs_modified },
+    diffFile      = { fg = c.guide_active },
+    diffIndexLine = { fg = c.keyword },
+    diffLine      = { fg = c.vcs_diff_text },
+    diffNewFile   = { fg = c.ui },
+    diffOldFile   = { fg = c.guide_normal },
+    diffRemoved   = { fg = c.vcs_removed },
     -- }}}
     -- GITGUTTER: {{{2
-    -- GitGutterAdd    = { fg = colors.string },
-    -- GitGutterChange = { fg = colors.func },
-    -- GitGutterDelete = { fg = colors.accent },
+    -- GitGutterAdd    = { fg = c.string },
+    -- GitGutterChange = { fg = c.func },
+    -- GitGutterDelete = { fg = c.accent },
     -- }}}
     -- GITSIGNS: {{{2
-    GitSignsAdd      = { fg = colors.vcs_added },
-    GitSignsAddNr    = { fg = colors.vcs_added },
-    GitSignsAddLn    = { fg = colors.vcs_added },
-    GitSignsChange   = { fg = colors.vcs_modified },
-    GitSignsChangeNr = { fg = colors.vcs_modified },
-    GitSignsChangeLn = { fg = colors.vcs_modified },
-    GitSignsDelete   = { fg = colors.vcs_removed },
-    GitSignsDeleteNr = { fg = colors.vcs_removed },
-    GitSignsDeleteLn = { fg = colors.vcs_removed },
+    GitSignsAdd      = { fg = c.vcs_added },
+    GitSignsAddNr    = { fg = c.vcs_added },
+    GitSignsAddLn    = { fg = c.vcs_added },
+    GitSignsChange   = { fg = c.vcs_modified },
+    GitSignsChangeNr = { fg = c.vcs_modified },
+    GitSignsChangeLn = { fg = c.vcs_modified },
+    GitSignsDelete   = { fg = c.vcs_removed },
+    GitSignsDeleteNr = { fg = c.vcs_removed },
+    GitSignsDeleteLn = { fg = c.vcs_removed },
     -- }}}
     -- Hop {{{2
-    HopNextKey   = { fg = colors.keyword, sp = colors.keyword, style = 'bold,underline' },
-    HopNextKey1  = { fg = colors.entity, sp = colors.tag, style = 'bold,underline' },
-    HopNextKey2  = { fg = colors.tag },
-    HopUnmatched = { fg = colors.comment },
+    HopNextKey   = { fg = c.keyword, sp = c.keyword, style = 'bold,underline' },
+    HopNextKey1  = { fg = c.entity, sp = c.tag, style = 'bold,underline' },
+    HopNextKey2  = { fg = c.tag },
+    HopUnmatched = { fg = c.comment },
     -- }}}
     -- INDENTBLANKLINE: {{{2
-    IndentBlanklineChar        = { fg = colors.guide_active },
-    IndentBlanklineContextChar = { fg = colors.guide_active },
+    IndentBlanklineChar        = { fg = c.guide_active },
+    IndentBlanklineContextChar = { fg = c.guide_active },
     -- }}}
     -- LSPSAGA: {{{2
-    -- DiagnosticError            = { fg = colors.error },
-    -- DiagnosticWarning          = { fg = colors.constant },
-    -- DiagnosticInformation      = { fg = colors.tag },
-    -- DiagnosticHint             = { fg = colors.keyword },
-    -- DiagnosticTruncateLine     = { fg = colors.fg },
-    -- LspFloatWinNormal          = { bg = colors.selection_inactive },
-    -- LspFloatWinBorder          = { fg = colors.keyword },
-    -- LspSagaBorderTitle         = { fg = colors.special },
-    -- LspSagaHoverBorder         = { fg = colors.tag },
-    -- LspSagaRenameBorder        = { fg = colors.string },
-    -- LspSagaDefPreviewBorder    = { fg = colors.string },
-    -- LspSagaCodeActionBorder    = { fg = colors.func },
-    -- LspSagaFinderSelection     = { fg = colors.string },
-    -- LspSagaCodeActionTitle     = { fg = colors.tag },
-    -- LspSagaCodeActionContent   = { fg = colors.keyword },
-    -- LspSagaSignatureHelpBorder = { fg = colors.keyword },
-    -- ReferencesCount            = { fg = colors.keyword },
-    -- DefinitionCount            = { fg = colors.keyword },
-    -- DefinitionIcon             = { fg = colors.func },
-    -- ReferencesIcon             = { fg = colors.func },
-    -- TargetWord                 = { fg = colors.special },
+    -- DiagnosticError            = { fg = c.error },
+    -- DiagnosticWarning          = { fg = c.constant },
+    -- DiagnosticInformation      = { fg = c.tag },
+    -- DiagnosticHint             = { fg = c.keyword },
+    -- DiagnosticTruncateLine     = { fg = c.fg },
+    -- LspFloatWinNormal          = { bg = c.selection_inactive },
+    -- LspFloatWinBorder          = { fg = c.keyword },
+    -- LspSagaBorderTitle         = { fg = c.special },
+    -- LspSagaHoverBorder         = { fg = c.tag },
+    -- LspSagaRenameBorder        = { fg = c.string },
+    -- LspSagaDefPreviewBorder    = { fg = c.string },
+    -- LspSagaCodeActionBorder    = { fg = c.func },
+    -- LspSagaFinderSelection     = { fg = c.string },
+    -- LspSagaCodeActionTitle     = { fg = c.tag },
+    -- LspSagaCodeActionContent   = { fg = c.keyword },
+    -- LspSagaSignatureHelpBorder = { fg = c.keyword },
+    -- ReferencesCount            = { fg = c.keyword },
+    -- DefinitionCount            = { fg = c.keyword },
+    -- DefinitionIcon             = { fg = c.func },
+    -- ReferencesIcon             = { fg = c.func },
+    -- TargetWord                 = { fg = c.special },
     -- }}}
     -- LSPTROUBLE: {{{2
-    -- LspTroubleText   = { fg = colors.text },
-    -- LspTroubleCount  = { fg = colors.keyword, bg = colors.line },
-    -- LspTroubleNormal = { fg = colors.fg, bg = colors.sidebar },
+    -- LspTroubleText   = { fg = c.text },
+    -- LspTroubleCount  = { fg = c.keyword, bg = c.line },
+    -- LspTroubleNormal = { fg = c.fg, bg = c.sidebar },
     -- }}}
     -- NEOGIT: {{{2
-    -- NeogitBranch               = { fg = colors.tag },
-    NeogitDiffAddHighlight     = { fg = colors.vcs_added_bg },
-    NeogitDiffContextHighlight = { bg = colors.line },
-    NeogitDiffDeleteHighlight  = { bg = colors.vcs_removed_bg },
-    NeogitHunkHeader           = { fg = colors.tag },
-    NeogitHunkHeaderHighlight  = { fg = colors.tag, bg = colors.line },
-    -- NeogitRemote               = { fg = colors.keyword },
+    -- NeogitBranch               = { fg = c.tag },
+    NeogitDiffAddHighlight     = { fg = c.vcs_added_bg },
+    NeogitDiffContextHighlight = { bg = c.line },
+    NeogitDiffDeleteHighlight  = { bg = c.vcs_removed_bg },
+    NeogitHunkHeader           = { fg = c.tag },
+    NeogitHunkHeaderHighlight  = { fg = c.tag, bg = c.line },
+    -- NeogitRemote               = { fg = c.keyword },
     -- }}}
     -- NVIMDAP: {{{2
-    -- DapBreakpoint = { fg = colors.accent },
-    -- DapStopped    = { fg = colors.string },
+    -- DapBreakpoint = { fg = c.accent },
+    -- DapStopped    = { fg = c.string },
     -- }}}
     -- NVIMTREE: {{{2
-    NvimTreeEmptyFolderName  = { fg = colors.fg },
-    NvimTreeExecFile         = { fg = colors.fg },
-    NvimTreeFolderIcon       = { fg = colors.accent },
-    NvimTreeFolderName       = { fg = colors.special },
-    NvimTreeGitDeleted       = { fg = colors.vcs_removed },
-    NvimTreeGitDirty         = { fg = colors.accent },
-    NvimTreeGitMerge         = { fg = colors.error },
-    NvimTreeGitNew           = { fg = colors.vcs_added },
-    NvimTreeGitStaged        = { fg = colors.vcs_modified },
-    NvimTreeImageFile        = { fg = colors.constant },
-    NvimTreeIndentMarker     = { fg = colors.guide_normal },
-    NvimTreeOpenedFolderName = { fg = colors.special },
-    NvimTreeRootFolder       = { fg = colors.keyword },
-    NvimTreeSpecialFile      = { fg = colors.fg },
-    NvimTreeWindowPicker     = { fg = colors.keyword, bg = colors.panel_border, style = 'bold' },
+    NvimTreeEmptyFolderName  = { fg = c.fg },
+    NvimTreeExecFile         = { fg = c.fg },
+    NvimTreeFolderIcon       = { fg = c.accent },
+    NvimTreeFolderName       = { fg = c.special },
+    NvimTreeGitDeleted       = { fg = c.vcs_removed },
+    NvimTreeGitDirty         = { fg = c.accent },
+    NvimTreeGitMerge         = { fg = c.error },
+    NvimTreeGitNew           = { fg = c.vcs_added },
+    NvimTreeGitStaged        = { fg = c.vcs_modified },
+    NvimTreeImageFile        = { fg = c.constant },
+    NvimTreeIndentMarker     = { fg = c.guide_normal },
+    NvimTreeOpenedFolderName = { fg = c.special },
+    NvimTreeRootFolder       = { fg = c.keyword },
+    NvimTreeSpecialFile      = { fg = c.fg },
+    NvimTreeWindowPicker     = { fg = c.keyword, bg = c.panel_border, style = 'bold' },
     -- }}}
     -- PACKER: {{{2
-    packerBool             = { fg = colors.markup,             bg = colors.none },
-    packerFail             = { fg = colors.error,              bg = colors.none },
-    packerHash             = { fg = colors.vcs_added,          bg = colors.none },
-    packerOutput           = { fg = colors.fg,                 bg = colors.none },
-    packerPackageName      = { fg = colors.entity,             bg = colors.none },
-    packerPackageNotLoaded = { fg = colors.keyword,            bg = colors.none },
-    packerProgress         = { fg = colors.constant,           bg = colors.none },
-    packerRelDate          = { fg = colors.constant,           bg = colors.none },
-    packerStatus           = { fg = colors.entity,             bg = colors.none },
-    packerStatusCommit     = { fg = colors.vcs_added,          bg = colors.none },
-    packerStatusFail       = { fg = colors.vcs_removed,        bg = colors.none },
-    packerStatusSuccess    = { fg = colors.vcs_diff_text,      bg = colors.none },
-    packerString           = { fg = colors.string,             bg = colors.none, style = 'italic' },
-    packerSuccess          = { fg = colors.ui,                 bg = colors.none },
-    packerTimeHigh         = { fg = colors.selection_bg,       bg = colors.none },
-    packerTimeLow          = { fg = colors.selection_border,   bg = colors.none },
-    packerTimeMedium       = { fg = colors.selection_inactive, bg = colors.none },
-    packerTrivial          = { fg = colors.warning,            bg = colors.none },
-    packerWorking          = { fg = colors.fg_idle,            bg = colors.none },
+    packerBool             = { fg = c.markup,             bg = c.none },
+    packerFail             = { fg = c.error,              bg = c.none },
+    packerHash             = { fg = c.vcs_added,          bg = c.none },
+    packerOutput           = { fg = c.fg,                 bg = c.none },
+    packerPackageName      = { fg = c.entity,             bg = c.none },
+    packerPackageNotLoaded = { fg = c.keyword,            bg = c.none },
+    packerProgress         = { fg = c.constant,           bg = c.none },
+    packerRelDate          = { fg = c.constant,           bg = c.none },
+    packerStatus           = { fg = c.entity,             bg = c.none },
+    packerStatusCommit     = { fg = c.vcs_added,          bg = c.none },
+    packerStatusFail       = { fg = c.vcs_removed,        bg = c.none },
+    packerStatusSuccess    = { fg = c.vcs_diff_text,      bg = c.none },
+    packerString           = { fg = c.string,             bg = c.none, style = 'italic' },
+    packerSuccess          = { fg = c.ui,                 bg = c.none },
+    packerTimeHigh         = { fg = c.selection_bg,       bg = c.none },
+    packerTimeLow          = { fg = c.selection_border,   bg = c.none },
+    packerTimeMedium       = { fg = c.selection_inactive, bg = c.none },
+    packerTrivial          = { fg = c.warning,            bg = c.none },
+    packerWorking          = { fg = c.fg_idle,            bg = c.none },
     -- }}}
     -- SNEAK: {{{2
-    -- Sneak      = { fg = colors.bg, bg = colors.accent },
-    -- SneakScope = { bg = colors.selection },
+    -- Sneak      = { fg = c.bg, bg = c.accent },
+    -- SneakScope = { bg = c.selection },
     -- }}}
     -- STARTIFY: {{{2
-    StartifyNumber = { fg = colors.comment },
-    StartifyBracket = { fg = colors.comment },
-    StartifySection = { fg = colors.accent },
+    StartifyNumber = { fg = c.comment },
+    StartifyBracket = { fg = c.comment },
+    StartifySection = { fg = c.accent },
     -- }}}
     -- TELESCOPE: {{{2
-    TelescopeNormal         = { fg = colors.fg, bg = colors.float },
-    TelescopePromptBorder   = { fg = colors.accent },
-    TelescopeResultsBorder  = { fg = colors.keyword },
-    TelescopePreviewBorder  = { fg = colors.string },
-    TelescopeSelectionCaret = { fg = colors.keyword },
-    TelescopeSelection      = { fg = colors.keyword, bg = colors.line },
-    TelescopeMatching       = { fg = colors.special },
+    TelescopeNormal         = { fg = c.fg, bg = c.float },
+    TelescopePromptBorder   = { fg = c.accent },
+    TelescopeResultsBorder  = { fg = c.keyword },
+    TelescopePreviewBorder  = { fg = c.string },
+    TelescopeSelectionCaret = { fg = c.keyword },
+    TelescopeSelection      = { fg = c.keyword, bg = c.line },
+    TelescopeMatching       = { fg = c.special },
     -- }}}
     -- WHICHKEY: {{{2
-    WhichKey          = { fg = colors.accent , style = 'bold'},
-    WhichKeyGroup     = { fg = colors.entity },
-    WhichKeyDesc      = { fg = colors.func, style = 'italic' },
-    WhichKeySeparator = { fg = colors.fg },
-    WhichKeyFloating  = { bg = colors.float },
-    WhichKeyFloat     = { bg = colors.float },
+    WhichKey          = { fg = c.accent , style = 'bold'},
+    WhichKeyGroup     = { fg = c.entity },
+    WhichKeyDesc      = { fg = c.func, style = 'italic' },
+    WhichKeySeparator = { fg = c.fg },
+    WhichKeyFloating  = { bg = c.float },
+    WhichKeyFloat     = { bg = c.float },
     -- }}}
   }
 
   --Set transparent background
-  if vim.g.ayu_disable_bg then
-    plugins.NvimTreeNormal = { fg = colors.fg, bg = colors.none }
-    plugins.StartifyFile   = { fg = colors.fg, bg = colors.none }
-    plugins.StartifyFooter = { fg = colors.fg, bg = colors.none }
-    plugins.StartifySlash  = { fg = colors.fg, bg = colors.none }
-    plugins.StartifyPath   = { fg = colors.entity, bg = colors.none, style = 'italic' }
+  if options.disable.background then
+    plugins.NvimTreeNormal = { fg = c.fg, bg = c.none }
+    plugins.StartifyFile   = { fg = c.fg, bg = c.none }
+    plugins.StartifyFooter = { fg = c.fg, bg = c.none }
+    plugins.StartifySlash  = { fg = c.fg, bg = c.none }
+    plugins.StartifyPath   = { fg = c.entity, bg = c.none, style = 'italic' }
   else
-    plugins.NvimTreeNormal = { fg = colors.fg, bg = colors.sidebar }
-    plugins.StartifyFile   = { fg = colors.fg, bg = colors.sidebar }
-    plugins.StartifyFooter = { fg = colors.fg, bg = colors.sidebar }
-    plugins.StartifySlash  = { fg = colors.fg, bg = colors.sidebar }
-    plugins.StartifyPath   = { fg = colors.entity, bg = colors.sidebar, style = 'italic' }
+    plugins.NvimTreeNormal = { fg = c.fg, bg = c.sidebar }
+    plugins.StartifyFile   = { fg = c.fg, bg = c.sidebar }
+    plugins.StartifyFooter = { fg = c.fg, bg = c.sidebar }
+    plugins.StartifySlash  = { fg = c.fg, bg = c.sidebar }
+    plugins.StartifyPath   = { fg = c.entity, bg = c.sidebar, style = 'italic' }
   end
 
   return plugins
