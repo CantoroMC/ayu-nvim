@@ -36,9 +36,9 @@ function M.apply()
         if vim.g.ayu_contrast then
           vim.cmd [[
             augroup ayu_contrast
-            autocmd!
-            autocmd TermOpen *         setlocal winhighlight=Normal:NormalFloat,SignColumn:NormalFloat
-            autocmd FileType packer,qf setlocal winhighlight=Normal:NormalFloat,SignColumn:NormalFloat
+              autocmd!
+              autocmd TermOpen *         setlocal winhighlight=Normal:NormalFloat,SignColumn:NormalFloat
+              autocmd FileType packer,qf setlocal winhighlight=Normal:NormalFloat,SignColumn:NormalFloat
             augroup end
           ]]
         end

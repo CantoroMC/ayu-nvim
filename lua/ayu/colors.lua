@@ -1,5 +1,4 @@
-local utils   = require'ayu.utils'
-local options = require'ayu.config'.options
+local utils = require'ayu.utils'
 
 local c = {
   white = '#ffffff',
@@ -97,9 +96,10 @@ if vim.o.background == 'dark' then
     -- }}}
   end
   -- CONTRAST: sidebars, floating windows and popup menus {{{2
-  if options.contrast.dark.enabled then
-    c.sidebar = utils.shade(c.bg, options.contrast.dark.amount)
-    c.float   = utils.shade(c.bg, options.contrast.dark.amount)
+  if vim.g.ayu_contrast then
+    local amount = vim.g.ayu_contrast_amount and vim.g.ayu_contrast_amount or -15
+    c.sidebar = utils.shade(c.bg, amount)
+    c.float   = utils.shade(c.bg, amount)
   else
     c.sidebar = c.bg
     c.float   = c.bg
@@ -147,15 +147,6 @@ else
   c.vcs_modified_bg    = '#e7e8e9'
   c.vcs_removed        = '#f27983'
   c.vcs_removed_bg     = '#f9ebe4'
-  -- }}}
-  -- CONTRAST: sidebars, floating windows and popup menus {{{2
-  if options.contrast.light.enabled then
-    c.sidebar = utils.shade(c.bg, options.contrast.light.amount)
-    c.float   = utils.shade(c.bg, options.contrast.light.amount)
-  else
-    c.sidebar = c.bg
-    c.float   = c.bg
-  end
   -- }}}
 end
 -- }}}

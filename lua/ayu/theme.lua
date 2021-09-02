@@ -1,5 +1,4 @@
 local c = require'ayu.colors'
-local options = require'ayu.config'.options
 
 local ayu = {}
 
@@ -61,14 +60,14 @@ ayu.define_syntax = function ()
 
   -- Options: {{{2
   -- Italicize comments {{{3
-  if options.italics.comments then
+  if vim.g.ayu_italics_comments then
     syntax.Comment = { fg = c.comment, style = 'italic' }
   else
     syntax.Comment = { fg = c.comment }
   end
   -- }}}
   -- Italicize string and characters {{{3
-  if options.italics.strings then
+  if vim.g.ayu_italics_strings then
     syntax.String     = { fg = c.string, style = 'italic' }
     syntax.Character  = { fg = c.markup, style = 'italic' }
   else
@@ -77,7 +76,7 @@ ayu.define_syntax = function ()
   end
   -- }}}
   -- Italicize keywords {{{3
-  if options.italics.keywords then
+  if vim.g.ayu_italics_keywords then
     syntax.Conditional = { fg = c.keyword, style = 'italic' }
     syntax.Keyword     = { fg = c.keyword, style = 'italic' }
     syntax.Repeat      = { fg = c.keyword, style = 'italic' }
@@ -88,14 +87,14 @@ ayu.define_syntax = function ()
   end
   -- }}}
   -- Italicize functions {{{3
-  if options.italics.functions then
+  if vim.g.ayu_italics_functions then
     syntax.Function = { fg = c.func, style = 'italic' }
   else
     syntax.Function = { fg = c.func }
   end
   -- }}}
   -- Italicize variables {{{3
-  if options.italics.variables then
+  if vim.g.ayu_italics_variables then
     syntax.Identifier = { fg = c.entity, style = 'italic' }
   else
     syntax.Identifier = { fg = c.entity }
@@ -167,7 +166,7 @@ ayu.define_editor = function ()
 
   -- Options: {{{2
   --Set transparent background
-  if options.disable.background then
+  if vim.g.ayu_disable_bg then
     editor.Normal     = { fg = c.fg, bg = c.none }
     editor.SignColumn = { fg = c.fg, bg = c.none }
   else
@@ -175,7 +174,7 @@ ayu.define_editor = function ()
     editor.SignColumn = { fg = c.fg, bg = c.bg }
   end
   -- Remove window split borders
-  if options.borders then
+  if vim.g.ayu_borders then
     editor.VertSplit = { fg = c.panel_border, bg = c.bg }
   else
     editor.VertSplit = { fg = c.bg, bg = c.none }
@@ -262,14 +261,14 @@ ayu.define_treeSitter = function ()
 
   -- Options: {{{2
   -- Italicize comments {{{3
-  if options.italics.comments then
+  if vim.g.ayu_italics_comments then
     treesitter.TSComment = { fg = c.comment , bg = c.none, style = 'italic' }
   else
     treesitter.TSComment = { fg = c.comment }
   end
   -- }}}
   -- Italicize string and characters {{{3
-  if options.italics.strings then
+  if vim.g.ayu_italics_strings then
     treesitter.TSCharacter    = { fg = c.markup, style = 'italic' }
     treesitter.TSString       = { fg = c.string, style = 'italic' }
     treesitter.TSStringEscape = { fg = c.fg,     style = 'italic' }
@@ -282,7 +281,7 @@ ayu.define_treeSitter = function ()
   end
   -- }}}
   -- Italicize keywords {{{3
-  if options.italics.keywords then
+  if vim.g.ayu_italics_keywords then
     treesitter.TSConditional     = { fg = c.keyword, style = 'italic' }
     treesitter.TSKeyword         = { fg = c.keyword, style = 'bold,italic' }
     treesitter.TSKeywordFunction = { fg = c.func,    style = 'italic' }
@@ -296,7 +295,7 @@ ayu.define_treeSitter = function ()
 
   -- }}}
   -- Italicize functions {{{3
-  if options.italics.functions then
+  if vim.g.ayu_italics_functions then
     treesitter.TSFuncBuiltin = { fg = c.special, style = 'italic' }
     treesitter.TSFunction    = { fg = c.func,    style = 'italic' }
     treesitter.TSMethod      = { fg = c.func,    style = 'italic' }
@@ -307,7 +306,7 @@ ayu.define_treeSitter = function ()
   end
   -- }}}
   -- Italicize variables {{{3
-  if options.italics.variables then
+  if vim.g.ayu_italics_variables then
     treesitter.TSVariable        = { fg = c.operator, style = 'italic' }
     treesitter.TSVariableBuiltin = { fg = c.operator, style = 'italic' }
   else
@@ -534,7 +533,7 @@ ayu.define_plugins = function()
   }
 
   --Set transparent background
-  if options.disable.background then
+  if vim.g.ayu_disable_bg then
     plugins.NvimTreeNormal = { fg = c.fg, bg = c.none }
     plugins.StartifyFile   = { fg = c.fg, bg = c.none }
     plugins.StartifyFooter = { fg = c.fg, bg = c.none }
