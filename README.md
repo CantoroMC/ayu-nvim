@@ -1,6 +1,6 @@
 # Neovim Ayu
 
-[ayu-vim](https://github.com/ayu-theme/ayu-vim), a theme for Vim, reimplemented in lua, 
+[ayu-vim](https://github.com/ayu-theme/ayu-vim), a theme for Vim, reimplemented in lua,
 with inspirations from [material.nvim](https://github.com/marko-cerovac/material.nvim).
 
 ## Screenshots
