@@ -6,10 +6,9 @@ local c = {
   none  = 'NONE',
 }
 
--- VARIANTS: mirage, dark and light {{{1
+-- VARIANTS: mirage, dark and light
 if vim.o.background == 'dark' then
   if vim.g.ayu_mirage then
-    -- MIRAGE: {{{2
     -- basics
     c.accent             = '#ffcc66'
     c.bg                 = '#212733'
@@ -50,9 +49,7 @@ if vim.o.background == 'dark' then
     c.vcs_modified_bg    = '#323a4c'
     c.vcs_removed        = '#f27983'
     c.vcs_removed_bg     = '#3e373a'
-    -- }}}
   else
-    -- DARK: {{{2
     -- basics
     c.accent             = '#f29718'
     c.bg                 = '#0f1419'
@@ -93,9 +90,8 @@ if vim.o.background == 'dark' then
     c.vcs_modified_bg    = '#1b2733'
     c.vcs_removed        = '#d96c75'
     c.vcs_removed_bg     = '#2d2220'
-    -- }}}
   end
-  -- CONTRAST: sidebars, floating windows and popup menus {{{2
+  -- CONTRAST: sidebars, floating windows and popup menus
   if vim.g.ayu_contrast then
     local amount = vim.g.ayu_contrast_amount and vim.g.ayu_contrast_amount or -15
     c.sidebar = utils.shade(c.bg, amount)
@@ -104,9 +100,7 @@ if vim.o.background == 'dark' then
     c.sidebar = c.bg
     c.float   = c.bg
   end
-  -- }}}
 else
-  -- LIGHT: {{{2
   -- basics
   c.accent             = '#ff6a00'
   c.bg                 = '#fafafa'
@@ -147,10 +141,6 @@ else
   c.vcs_modified_bg    = '#e7e8e9'
   c.vcs_removed        = '#f27983'
   c.vcs_removed_bg     = '#f9ebe4'
-  -- }}}
 end
--- }}}
 
 return c
-
--- vim:fdm=marker
