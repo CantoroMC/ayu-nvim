@@ -265,7 +265,7 @@ ayu.define_treeSitter = function ()
   -- Options: {{{2
   -- Italicize comments {{{3
   if vim.g.ayu_italics_comments then
-    treesitter.TSComment = { fg = c.comment , bg = c.none, style = 'italic' }
+    treesitter.TSComment = { fg = c.comment, style = 'italic' }
   else
     treesitter.TSComment = { fg = c.comment }
   end
