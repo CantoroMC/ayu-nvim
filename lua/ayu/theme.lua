@@ -24,13 +24,10 @@ ayu.define_syntax = function ()
     PreCondit           = { fg = c.special },
     PreProc             = { fg = c.accent },
     Special             = { fg = c.accent },
-    SpecialChar         = { fg = c.keyword },
-    SpecialComment      = { fg = c.entity },
     Statement           = { fg = c.keyword },
     StorageClass        = { fg = c.special },
     Structure           = { fg = c.special },
     Tag                 = { fg = c.accent },
-    Todo                = { fg = c.markup, style = 'bold,italic' },
     Type                = { fg = c.entity },
     Typedef             = { fg = c.accent },
     Underlined          = { fg = c.tag, style = 'underline', sp = c.tag },
@@ -61,18 +58,24 @@ ayu.define_syntax = function ()
   -- Options: {{{2
   -- Italicize comments {{{3
   if vim.g.ayu_italics_comments then
-    syntax.Comment = { fg = c.comment, style = 'italic' }
+    syntax.Comment        = { fg = c.comment, style = 'italic' }
+    syntax.SpecialComment = { fg = c.entity,  style = 'italic' }
+    syntax.Todo           = { fg = c.markup,  style = 'bold,italic' }
   else
-    syntax.Comment = { fg = c.comment }
+    syntax.Comment        = { fg = c.comment }
+    syntax.SpecialComment = { fg = c.entity }
+    syntax.Todo           = { fg = c.markup,  style = 'bold' }
   end
   -- }}}
   -- Italicize string and characters {{{3
   if vim.g.ayu_italics_strings then
-    syntax.String     = { fg = c.string, style = 'italic' }
-    syntax.Character  = { fg = c.markup, style = 'italic' }
+    syntax.String      = { fg = c.string,  style = 'italic' }
+    syntax.Character   = { fg = c.markup,  style = 'italic' }
+    syntax.SpecialChar = { fg = c.keyword, style = 'italic' }
   else
-    syntax.String     = { fg = c.string }
-    syntax.Character  = { fg = c.markup }
+    syntax.String      = { fg = c.string }
+    syntax.Character   = { fg = c.markup }
+    syntax.SpecialChar = { fg = c.keyword }
   end
   -- }}}
   -- Italicize keywords {{{3
