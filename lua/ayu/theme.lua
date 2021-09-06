@@ -537,17 +537,17 @@ ayu.define_plugins = function()
 
   --Set transparent background
   if vim.g.ayu_disable_bg then
-    plugins.NvimTreeNormal = { fg = c.fg, bg = c.none }
-    plugins.StartifyFile   = { fg = c.fg, bg = c.none }
-    plugins.StartifyFooter = { fg = c.fg, bg = c.none }
-    plugins.StartifySlash  = { fg = c.fg, bg = c.none }
-    plugins.StartifyPath   = { fg = c.entity, bg = c.none, style = 'italic' }
+    plugins.NvimTreeNormal = { fg = c.sidebar, bg = c.none }
+    plugins.StartifyFile   = { fg = c.fg,      bg = c.none }
+    plugins.StartifyFooter = { fg = c.fg,      bg = c.none }
+    plugins.StartifySlash  = { fg = c.fg,      bg = c.none }
+    plugins.StartifyPath   = { fg = c.entity,  bg = c.none, style = 'italic' }
   else
-    plugins.NvimTreeNormal = { fg = c.fg, bg = c.bg }
-    plugins.StartifyFile   = { fg = c.fg, bg = c.bg }
-    plugins.StartifyFooter = { fg = c.fg, bg = c.bg }
-    plugins.StartifySlash  = { fg = c.fg, bg = c.bg }
-    plugins.StartifyPath   = { fg = c.entity, bg = c.bg, style = 'italic' }
+    plugins.NvimTreeNormal = { fg = c.sidebar, bg = c.bg }
+    plugins.StartifyFile   = { fg = c.fg,      bg = c.bg }
+    plugins.StartifyFooter = { fg = c.fg,      bg = c.bg }
+    plugins.StartifySlash  = { fg = c.fg,      bg = c.bg }
+    plugins.StartifyPath   = { fg = c.entity,  bg = c.bg, style = 'italic' }
   end
 
   return plugins
