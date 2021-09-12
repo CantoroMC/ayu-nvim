@@ -525,6 +525,10 @@ ayu.define_plugins = function()
     TelescopeSelection      = { fg = c.keyword, bg = c.line },
     TelescopeMatching       = { fg = c.special },
     -- }}}
+    -- TermDebug {{{2
+    debugPC         = { fg = c.none,          bg = c.guide_active },
+    debugBreakpoint = { fg = c.gutter_normal, bg = c.accent },
+    -- }}}
     -- WHICHKEY: {{{2
     WhichKey          = { fg = c.accent , style = 'bold'},
     WhichKeyGroup     = { fg = c.entity },
