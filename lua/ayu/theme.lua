@@ -216,14 +216,14 @@ ayu.define_treeSitter = function ()
     TSAnnotation         = { fg = c.markup },
     TSAttribute          = { fg = c.accent },
     TSBoolean            = { fg = c.markup },
-    TSConstBuiltin       = { fg = c.entity },
-    TSConstMacro         = { fg = c.func },
+    TSConstBuiltin       = { fg = c.constant, style = 'italic' },
+    TSConstMacro         = { fg = c.constant, style = 'bold' },
     TSConstant           = { fg = c.constant },
     TSConstructor        = { fg = c.entity },
     TSDanger             = { fg = c.error, style = 'standout' },
     TSEmphasis           = { fg = c.special, style = 'italic' },
     TSEnvironmentName    = { fg = c.keyword },
-    TSEnvironment        = { fg = c.special, style = 'italic' },
+    TSEnvironment        = { fg = c.keyword, style = 'italic' },
     TSError              = { fg = c.error },
     TSException          = { fg = c.constant },
     TSField              = { fg = c.entity },
@@ -242,7 +242,7 @@ ayu.define_treeSitter = function ()
     TSOperator           = { fg = c.special },
     TSParameter          = { fg = c.tag, style = 'italic' },
     TSParameterReference = { fg = c.tag },
-    TSProperty           = { fg = c.tag },
+    TSProperty           = { fg = c.special },
     TSPunctBracket       = { fg = c.special },
     TSPunctDelimiter     = { fg = c.special },
     TSPunctSpecial       = { fg = c.special },
@@ -310,11 +310,11 @@ ayu.define_treeSitter = function ()
   -- }}}
   -- Italicize variables {{{3
   if vim.g.ayu_italics_variables then
-    treesitter.TSVariable        = { fg = c.operator, style = 'italic' }
-    treesitter.TSVariableBuiltin = { fg = c.operator, style = 'italic' }
+    treesitter.TSVariable        = { fg = c.entity, style = 'italic' }
+    treesitter.TSVariableBuiltin = { fg = c.entity, style = 'italic' }
   else
-    treesitter.TSVariable        = { fg = c.operator }
-    treesitter.TSVariableBuiltin = { fg = c.operator }
+    treesitter.TSVariable        = { fg = c.entity }
+    treesitter.TSVariableBuiltin = { fg = c.entity }
   end
   -- }}}
   -- }}}
