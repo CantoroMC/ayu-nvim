@@ -127,6 +127,7 @@ ayu.define_editor = function ()
     DiffText          = { bg = c.vcs_diff_text },
     Directory         = { fg = c.func },
     ErrorMsg          = { fg = c.white, bg = c.error, style = 'standout' },
+    FloatBorder       = { fg = c.panel_border, bg = c.bg },
     FoldColumn        = { bg = c.bg },
     Folded            = { fg = c.fg_idle, bg = c.panel_bg },
     IncSearch         = { fg = c.keyword, bg = c.ui },
