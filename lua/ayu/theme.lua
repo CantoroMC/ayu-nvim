@@ -61,12 +61,12 @@ end
 
 Theme.languages = function()
   local html = {
-    htmlLink            = { fg = c.tag,      style = "underline" },
-    htmlH1              = { fg = c.special,  style = "bold" },
-    htmlH2              = { fg = c.accent,   style = "bold" },
-    htmlH3              = { fg = c.string,   style = "bold" },
-    htmlH4              = { fg = c.constant, style = "bold" },
-    htmlH5              = { fg = c.keyword,  style = "bold" },
+    htmlLink = { fg = c.tag,      style = "underline" },
+    htmlH1   = { fg = c.special,  style = "bold" },
+    htmlH2   = { fg = c.accent,   style = "bold" },
+    htmlH3   = { fg = c.string,   style = "bold" },
+    htmlH4   = { fg = c.constant, style = "bold" },
+    htmlH5   = { fg = c.keyword,  style = "bold" },
   }
   local markdown = {
     markdownH1          = { fg = c.special,  style = "bold,italic" },

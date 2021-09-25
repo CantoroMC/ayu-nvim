@@ -23,14 +23,8 @@ To use `mirage` variant instead of `dark` for dark background you should specify
 vim.g.ayu_mirage = true
 ```
 
-| Option                        | Default     | Description                                                                             |
-| ----------------------------- | ----------- | ----------------------------------------------------------------------------------------|
-| `vim.g.ayu_disable_bg`        | `false`     | Disable the setting of background color so that NeoVim can use your terminal background |
-| `vim.g.ayu_borders`           | `false`     | Enable the border between vertically split windows visible                              |
-| `vim.g.ayu_contrast`          | `false`     | Make sidebars and pop-up menus like nvim-tree and telescope have a different background |
-| `vim.g.ayu_contrast_amount`   | `-15`       | Contrast percentage for sidebars and popup menus (negative values to darken)            |
-| `vim.g.ayu_italics_comments`  | `false`     |                                                                                         |
-| `vim.g.ayu_italics_string`    | `false`     |                                                                                         |
-| `vim.g.ayu_italics_keywords`  | `false`     |                                                                                         |
-| `vim.g.ayu_italics_functions` | `false`     |                                                                                         |
-| `vim.g.ayu_italics_variables` | `false`     |                                                                                         |
+By default, many highlighting groups have the italic style, to avoid that add
+```lua
+vim.g.ayu_avoid_italics = true
+```
+to your init.lua
