@@ -30,19 +30,7 @@ Theme.syntax = function ()
     Underlined          = { fg = c.tag, style = 'underline', sp = c.tag },
   }
 
-  if vim.g.ayu_extra_italics then
-    syntax.Character      = { fg = c.markup,  style = 'italic' }
-    syntax.Comment        = { fg = c.comment, style = 'italic' }
-    syntax.Conditional    = { fg = c.keyword, style = 'italic' }
-    syntax.Function       = { fg = c.func, style = 'italic' }
-    syntax.Identifier     = { fg = c.entity, style = 'italic' }
-    syntax.Keyword        = { fg = c.keyword, style = 'italic' }
-    syntax.Repeat         = { fg = c.keyword, style = 'italic' }
-    syntax.SpecialChar    = { fg = c.keyword, style = 'italic' }
-    syntax.SpecialComment = { fg = c.entity,  style = 'italic' }
-    syntax.String         = { fg = c.string,  style = 'italic' }
-    syntax.Todo           = { fg = c.markup,  style = 'bold,italic' }
-  else
+  if vim.g.ayu_avoid_italics then
     syntax.Character      = { fg = c.markup }
     syntax.Comment        = { fg = c.comment }
     syntax.Conditional    = { fg = c.keyword }
@@ -54,6 +42,18 @@ Theme.syntax = function ()
     syntax.SpecialComment = { fg = c.entity }
     syntax.String         = { fg = c.string }
     syntax.Todo           = { fg = c.markup,  style = 'bold' }
+  else
+    syntax.Character      = { fg = c.markup,  style = 'italic' }
+    syntax.Comment        = { fg = c.comment, style = 'italic' }
+    syntax.Conditional    = { fg = c.keyword, style = 'italic' }
+    syntax.Function       = { fg = c.func,    style = 'italic' }
+    syntax.Identifier     = { fg = c.entity,  style = 'italic' }
+    syntax.Keyword        = { fg = c.keyword, style = 'italic' }
+    syntax.Repeat         = { fg = c.keyword, style = 'italic' }
+    syntax.SpecialChar    = { fg = c.keyword, style = 'italic' }
+    syntax.SpecialComment = { fg = c.entity,  style = 'italic' }
+    syntax.String         = { fg = c.string,  style = 'italic' }
+    syntax.Todo           = { fg = c.markup,  style = 'bold,italic' }
   end
 
   return syntax
@@ -87,7 +87,7 @@ Theme.languages = function()
 end
 
 Theme.editor = function ()
-  local editor = {
+  return {
     ColorColumn       = { bg = c.line },
     Conceal           = { fg = c.comment },
     CursorColumn      = { bg = c.line },
@@ -111,6 +111,7 @@ Theme.editor = function ()
     ModeMsg           = { fg = c.string },
     MoreMsg           = { fg = c.string },
     NonText           = { fg = c.guide_normal },
+    Normal            = { fg = c.fg, bg = c.bg },
     NormalFloat       = { fg = c.fg,      bg = c.bg },
     Pmenu             = { fg = c.fg,      bg = c.selection_inactive },
     PmenuSbar         = { fg = c.accent,  bg = c.selection_inactive },
@@ -119,6 +120,7 @@ Theme.editor = function ()
     Question          = { fg = c.string },
     QuickFixLine      = { fg = c.special, bg = c.guide_normal },
     Search            = { fg = c.bg,      bg = c.constant },
+    SignColumn        = { fg = c.fg, bg = c.bg },
     SpecialKey        = { fg = c.selection_inactive },
     SpellBad          = { style = 'undercurl', sp = c.error },
     SpellCap          = { style = 'undercurl', sp = c.tag },
@@ -132,6 +134,7 @@ Theme.editor = function ()
     TabLineFill       = { fg = c.fg,      bg = c.panel_border },
     TabLineSel        = { fg = c.fg,      bg = c.bg },
     Title             = { fg = c.keyword },
+    VertSplit         = { fg = c.panel_border, bg = c.bg },
     Visual            = { bg = c.selection_inactive },
     VisualNOS         = { bg = c.selection },
     WarningMsg        = { fg = c.warning },
@@ -141,21 +144,6 @@ Theme.editor = function ()
     healthWarning     = { fg = c.warning },
     qfLineNr          = { fg = c.keyword },
   }
-
-  if vim.g.ayu_disable_bg then
-    editor.Normal     = { fg = c.fg, bg = c.none }
-    editor.SignColumn = { fg = c.fg, bg = c.none }
-  else
-    editor.Normal     = { fg = c.fg, bg = c.bg }
-    editor.SignColumn = { fg = c.fg, bg = c.bg }
-  end
-  if vim.g.ayu_borders then
-    editor.VertSplit = { fg = c.panel_border, bg = c.bg }
-  else
-    editor.VertSplit = { fg = c.bg, bg = c.none }
-  end
-
-  return editor
 end
 
 Theme.terminal = function ()
@@ -227,22 +215,7 @@ Theme.treesitter = function ()
     TSWarning            = { fg = c.warning },
   }
 
-  if vim.g.ayu_extra_italics then
-    treesitter.TSCharacter       = { fg = c.markup, style = 'italic' }
-    treesitter.TSComment         = { fg = c.comment, style = 'italic' }
-    treesitter.TSConditional     = { fg = c.keyword, style = 'italic' }
-    treesitter.TSFuncBuiltin     = { fg = c.special, style = 'italic' }
-    treesitter.TSFunction        = { fg = c.func,    style = 'italic' }
-    treesitter.TSKeyword         = { fg = c.keyword, style = 'bold,italic' }
-    treesitter.TSKeywordFunction = { fg = c.func,    style = 'italic' }
-    treesitter.TSMethod          = { fg = c.func,    style = 'italic' }
-    treesitter.TSRepeat          = { fg = c.keyword, style = 'italic' }
-    treesitter.TSString          = { fg = c.string, style = 'italic' }
-    treesitter.TSStringEscape    = { fg = c.fg,     style = 'italic' }
-    treesitter.TSStringRegex     = { fg = c.func,   style = 'italic' }
-    treesitter.TSVariable        = { fg = c.entity, style = 'italic' }
-    treesitter.TSVariableBuiltin = { fg = c.entity, style = 'italic' }
-  else
+  if vim.g.ayu_avoid_italics then
     treesitter.TSCharacter       = { fg = c.markup }
     treesitter.TSComment         = { fg = c.comment }
     treesitter.TSConditional     = { fg = c.keyword }
@@ -257,6 +230,21 @@ Theme.treesitter = function ()
     treesitter.TSStringRegex     = { fg = c.func }
     treesitter.TSVariable        = { fg = c.entity }
     treesitter.TSVariableBuiltin = { fg = c.entity }
+  else
+    treesitter.TSCharacter       = { fg = c.markup, style = 'italic' }
+    treesitter.TSComment         = { fg = c.comment, style = 'italic' }
+    treesitter.TSConditional     = { fg = c.keyword, style = 'italic' }
+    treesitter.TSFuncBuiltin     = { fg = c.special, style = 'italic' }
+    treesitter.TSFunction        = { fg = c.func,    style = 'italic' }
+    treesitter.TSKeyword         = { fg = c.keyword, style = 'bold,italic' }
+    treesitter.TSKeywordFunction = { fg = c.func,    style = 'italic' }
+    treesitter.TSMethod          = { fg = c.func,    style = 'italic' }
+    treesitter.TSRepeat          = { fg = c.keyword, style = 'italic' }
+    treesitter.TSString          = { fg = c.string, style = 'italic' }
+    treesitter.TSStringEscape    = { fg = c.fg,     style = 'italic' }
+    treesitter.TSStringRegex     = { fg = c.func,   style = 'italic' }
+    treesitter.TSVariable        = { fg = c.entity, style = 'italic' }
+    treesitter.TSVariableBuiltin = { fg = c.entity, style = 'italic' }
   end
 
   return treesitter
