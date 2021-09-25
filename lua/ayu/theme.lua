@@ -195,7 +195,7 @@ Theme.treesitter = function ()
     TSOperator           = { fg = c.special },
     TSParameter          = { fg = c.tag, style = 'italic' },
     TSParameterReference = { fg = c.tag },
-    TSProperty           = { fg = c.special },
+    TSProperty           = { fg = c.fg, style = 'italic' },
     TSPunctBracket       = { fg = c.special },
     TSPunctDelimiter     = { fg = c.special },
     TSPunctSpecial       = { fg = c.special },
