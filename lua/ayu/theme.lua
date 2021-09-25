@@ -167,7 +167,6 @@ end
 
 Theme.treesitter = function ()
   local treesitter = {
-    TSAnnotation         = { fg = c.markup },
     TSAttribute          = { fg = c.accent },
     TSBoolean            = { fg = c.markup },
     TSConstBuiltin       = { fg = c.constant, style = 'italic' },
@@ -228,6 +227,7 @@ Theme.treesitter = function ()
     treesitter.TSString          = { fg = c.string }
     treesitter.TSStringEscape    = { fg = c.fg }
     treesitter.TSStringRegex     = { fg = c.func }
+    treesitter.TSStringSpecial   = { fg = c.string, style = 'bold' }
     treesitter.TSVariable        = { fg = c.entity }
     treesitter.TSVariableBuiltin = { fg = c.entity }
   else
@@ -243,6 +243,7 @@ Theme.treesitter = function ()
     treesitter.TSString          = { fg = c.string, style = 'italic' }
     treesitter.TSStringEscape    = { fg = c.fg,     style = 'italic' }
     treesitter.TSStringRegex     = { fg = c.func,   style = 'italic' }
+    treesitter.TSStringSpecial   = { fg = c.string, style = 'bold,italic' }
     treesitter.TSVariable        = { fg = c.entity, style = 'italic' }
     treesitter.TSVariableBuiltin = { fg = c.entity, style = 'italic' }
   end
@@ -300,56 +301,73 @@ Theme.plugins = function()
     GitSignsDeleteLn = { fg = c.vcs_removed },
   }
   local indentblankline = {
-    IndentBlanklineChar        = { fg = c.guide_active },
-    IndentBlanklineContextChar = { fg = c.guide_active },
+    IndentBlanklineChar               = { fg = c.guide_active },
+    IndentBlanklineContextChar        = { fg = c.guide_active },
+    IndentBlanklineSpaceChar          = { fg = c.guide_active },
+    IndentBlanklineSpaceCharBlankline = { fg = c.guide_active },
   }
   local nvimtree = {
     NvimTreeEmptyFolderName  = { fg = c.fg },
     NvimTreeExecFile         = { fg = c.fg },
     NvimTreeFolderIcon       = { fg = c.accent },
     NvimTreeFolderName       = { fg = c.special },
-    NvimTreeGitDeleted       = { fg = c.vcs_removed },
-    NvimTreeGitDirty         = { fg = c.accent },
-    NvimTreeGitMerge         = { fg = c.error },
-    NvimTreeGitNew           = { fg = c.vcs_added },
-    NvimTreeGitStaged        = { fg = c.vcs_modified },
     NvimTreeImageFile        = { fg = c.constant },
     NvimTreeIndentMarker     = { fg = c.guide_normal },
+    NvimTreeMarkdownFile     = { fg = c.error, style = 'italic' },
     NvimTreeNormal           = { fg = c.fg,     bg = c.bg },
-    NvimTreeOpenedFolderName = { fg = c.special },
-    NvimTreeRootFolder       = { fg = c.keyword },
-    NvimTreeSpecialFile      = { fg = c.fg },
-    NvimTreeWindowPicker     = { fg = c.keyword, bg = c.panel_border, style = 'bold' },
+    NvimTreeOpenedFile       = { fg = c.entity, style = 'italic' },
+    NvimTreeOpenedFolderName = { fg = c.entity },
+    NvimTreeRootFolder       = { fg = c.keyword, style = 'bold,italic' },
+    NvimTreeSpecialFile      = { fg = c.special },
+    NvimTreeSymlink          = { fg = c.tag },
+    NvimTreeWindowPicker     = { fg = c.constant, bg = c.panel_border, style = 'bold' },
+
+    NvimTreeGitDeleted  = { fg = c.vcs_removed },
+    NvimTreeGitDirty    = { fg = c.accent },
+    NvimTreeGitMerge    = { fg = c.error },
+    NvimTreeGitNew      = { fg = c.vcs_added },
+    NvimTreeGitRenamed  = { fg = c.vcs_added, style = 'italic' },
+    NvimTreeGitStaged   = { fg = c.vcs_modified },
+    NvimTreeFileDeleted = { fg = c.vcs_removed },
+    NvimTreeFileDirty   = { fg = c.accent },
+    NvimTreeFileMerge   = { fg = c.error },
+    NvimTreeFileNew     = { fg = c.vcs_added },
+    NvimTreeFileRenamed = { fg = c.vcs_added, style = 'italic' },
+    NvimTreeFileStaged  = { fg = c.vcs_modified },
   }
   local packer = {
-    packerBool             = { fg = c.markup,             bg = c.none },
-    packerFail             = { fg = c.error,              bg = c.none },
-    packerHash             = { fg = c.vcs_added,          bg = c.none },
-    packerOutput           = { fg = c.fg,                 bg = c.none },
-    packerPackageName      = { fg = c.entity,             bg = c.none },
-    packerPackageNotLoaded = { fg = c.keyword,            bg = c.none },
-    packerProgress         = { fg = c.constant,           bg = c.none },
-    packerRelDate          = { fg = c.constant,           bg = c.none },
-    packerStatus           = { fg = c.entity,             bg = c.none },
-    packerStatusCommit     = { fg = c.vcs_added,          bg = c.none },
-    packerStatusFail       = { fg = c.error,              bg = c.none },
-    packerStatusSuccess    = { fg = c.special,            bg = c.none },
-    packerString           = { fg = c.string,             bg = c.none, style = 'italic' },
-    packerSuccess          = { fg = c.ui,                 bg = c.none },
-    packerTimeHigh         = { fg = c.selection_bg,       bg = c.none },
-    packerTimeLow          = { fg = c.selection_border,   bg = c.none },
-    packerTimeMedium       = { fg = c.selection_inactive, bg = c.none },
-    packerTrivial          = { fg = c.warning,            bg = c.none },
-    packerWorking          = { fg = c.fg_idle,            bg = c.none },
+    packerBool             = { fg = c.markup },
+    packerFail             = { fg = c.error },
+    packerHash             = { fg = c.vcs_added },
+    packerOutput           = { fg = c.fg },
+    packerPackageName      = { fg = c.entity },
+    packerPackageNotLoaded = { fg = c.keyword },
+    packerProgress         = { fg = c.constant },
+    packerRelDate          = { fg = c.constant },
+    packerStatus           = { fg = c.entity },
+    packerStatusCommit     = { fg = c.vcs_added },
+    packerStatusFail       = { fg = c.error },
+    packerStatusSuccess    = { fg = c.tag },
+    packerString           = { fg = c.string, style = 'italic' },
+    packerSuccess          = { fg = c.ui },
+    packerTimeHigh         = { fg = c.selection_bg },
+    packerTimeLow          = { fg = c.selection_border },
+    packerTimeMedium       = { fg = c.selection_inactive },
+    packerTrivial          = { fg = c.warning },
+    packerWorking          = { fg = c.fg_idle },
   }
   local startify = {
-    StartifyBracket = { fg = c.comment },
-    StartifyFile    = { fg = c.fg,     bg = c.bg },
-    StartifyFooter  = { fg = c.fg,     bg = c.bg },
-    StartifyNumber  = { fg = c.comment },
-    StartifyPath    = { fg = c.entity, bg = c.bg, style = 'italic' },
+    StartifyBracket = { fg = c.fg_idle },
+    StartifyFile    = { fg = c.tag,           style = 'bold' },
+    StartifyFooter  = { fg = c.operator },
+    StartifyHeader  = { fg = c.operator },
+    StartifyNumber  = { fg = c.markup },
+    StartifyPath    = { fg = c.gutter_active, style = 'italic' },
     StartifySection = { fg = c.accent },
-    StartifySlash   = { fg = c.fg,     bg = c.bg },
+    StartifySelect  = { fg = c.fg,            style = 'bold' },
+    StartifySlash   = { fg = c.fg_idle,       style = 'italic' },
+    StartifySpecial = { fg = c.keyword },
+    StartifyVar     = { fg = c.constant },
   }
   local termdebug = {
     debugPC         = { fg = c.none,          bg = c.guide_active },
