@@ -30,42 +30,30 @@ Theme.syntax = function ()
     Underlined          = { fg = c.tag, style = 'underline', sp = c.tag },
   }
 
-  if vim.g.ayu_italics_comments then
+  if vim.g.ayu_extra_italics then
+    syntax.Character      = { fg = c.markup,  style = 'italic' }
     syntax.Comment        = { fg = c.comment, style = 'italic' }
+    syntax.Conditional    = { fg = c.keyword, style = 'italic' }
+    syntax.Function       = { fg = c.func, style = 'italic' }
+    syntax.Identifier     = { fg = c.entity, style = 'italic' }
+    syntax.Keyword        = { fg = c.keyword, style = 'italic' }
+    syntax.Repeat         = { fg = c.keyword, style = 'italic' }
+    syntax.SpecialChar    = { fg = c.keyword, style = 'italic' }
     syntax.SpecialComment = { fg = c.entity,  style = 'italic' }
+    syntax.String         = { fg = c.string,  style = 'italic' }
     syntax.Todo           = { fg = c.markup,  style = 'bold,italic' }
   else
+    syntax.Character      = { fg = c.markup }
     syntax.Comment        = { fg = c.comment }
+    syntax.Conditional    = { fg = c.keyword }
+    syntax.Function       = { fg = c.func }
+    syntax.Identifier     = { fg = c.entity }
+    syntax.Keyword        = { fg = c.keyword }
+    syntax.Repeat         = { fg = c.keyword }
+    syntax.SpecialChar    = { fg = c.keyword }
     syntax.SpecialComment = { fg = c.entity }
+    syntax.String         = { fg = c.string }
     syntax.Todo           = { fg = c.markup,  style = 'bold' }
-  end
-  if vim.g.ayu_italics_strings then
-    syntax.String      = { fg = c.string,  style = 'italic' }
-    syntax.Character   = { fg = c.markup,  style = 'italic' }
-    syntax.SpecialChar = { fg = c.keyword, style = 'italic' }
-  else
-    syntax.String      = { fg = c.string }
-    syntax.Character   = { fg = c.markup }
-    syntax.SpecialChar = { fg = c.keyword }
-  end
-  if vim.g.ayu_italics_keywords then
-    syntax.Conditional = { fg = c.keyword, style = 'italic' }
-    syntax.Keyword     = { fg = c.keyword, style = 'italic' }
-    syntax.Repeat      = { fg = c.keyword, style = 'italic' }
-  else
-    syntax.Conditional = { fg = c.keyword }
-    syntax.Keyword     = { fg = c.keyword }
-    syntax.Repeat      = { fg = c.keyword }
-  end
-  if vim.g.ayu_italics_functions then
-    syntax.Function = { fg = c.func, style = 'italic' }
-  else
-    syntax.Function = { fg = c.func }
-  end
-  if vim.g.ayu_italics_variables then
-    syntax.Identifier = { fg = c.entity, style = 'italic' }
-  else
-    syntax.Identifier = { fg = c.entity }
   end
 
   return syntax
@@ -239,46 +227,34 @@ Theme.treesitter = function ()
     TSWarning            = { fg = c.warning },
   }
 
-  if vim.g.ayu_italics_comments then
-    treesitter.TSComment = { fg = c.comment, style = 'italic' }
-  else
-    treesitter.TSComment = { fg = c.comment }
-  end
-  if vim.g.ayu_italics_strings then
-    treesitter.TSCharacter    = { fg = c.markup, style = 'italic' }
-    treesitter.TSString       = { fg = c.string, style = 'italic' }
-    treesitter.TSStringEscape = { fg = c.fg,     style = 'italic' }
-    treesitter.TSStringRegex  = { fg = c.func,   style = 'italic' }
-  else
-    treesitter.TSCharacter    = { fg = c.markup }
-    treesitter.TSString       = { fg = c.string }
-    treesitter.TSStringEscape = { fg = c.fg }
-    treesitter.TSStringRegex  = { fg = c.func }
-  end
-  if vim.g.ayu_italics_keywords then
+  if vim.g.ayu_extra_italics then
+    treesitter.TSCharacter       = { fg = c.markup, style = 'italic' }
+    treesitter.TSComment         = { fg = c.comment, style = 'italic' }
     treesitter.TSConditional     = { fg = c.keyword, style = 'italic' }
+    treesitter.TSFuncBuiltin     = { fg = c.special, style = 'italic' }
+    treesitter.TSFunction        = { fg = c.func,    style = 'italic' }
     treesitter.TSKeyword         = { fg = c.keyword, style = 'bold,italic' }
     treesitter.TSKeywordFunction = { fg = c.func,    style = 'italic' }
+    treesitter.TSMethod          = { fg = c.func,    style = 'italic' }
     treesitter.TSRepeat          = { fg = c.keyword, style = 'italic' }
-  else
-    treesitter.TSConditional     = { fg = c.keyword }
-    treesitter.TSKeyword         = { fg = c.keyword, style = 'bold' }
-    treesitter.TSKeywordFunction = { fg = c.func }
-    treesitter.TSRepeat          = { fg = c.keyword }
-  end
-  if vim.g.ayu_italics_functions then
-    treesitter.TSFuncBuiltin = { fg = c.special, style = 'italic' }
-    treesitter.TSFunction    = { fg = c.func,    style = 'italic' }
-    treesitter.TSMethod      = { fg = c.func,    style = 'italic' }
-  else
-    treesitter.TSFuncBuiltin = { fg = c.special }
-    treesitter.TSFunction    = { fg = c.func }
-    treesitter.TSMethod      = { fg = c.func }
-  end
-  if vim.g.ayu_italics_variables then
+    treesitter.TSString          = { fg = c.string, style = 'italic' }
+    treesitter.TSStringEscape    = { fg = c.fg,     style = 'italic' }
+    treesitter.TSStringRegex     = { fg = c.func,   style = 'italic' }
     treesitter.TSVariable        = { fg = c.entity, style = 'italic' }
     treesitter.TSVariableBuiltin = { fg = c.entity, style = 'italic' }
   else
+    treesitter.TSCharacter       = { fg = c.markup }
+    treesitter.TSComment         = { fg = c.comment }
+    treesitter.TSConditional     = { fg = c.keyword }
+    treesitter.TSFuncBuiltin     = { fg = c.special }
+    treesitter.TSFunction        = { fg = c.func }
+    treesitter.TSKeyword         = { fg = c.keyword, style = 'bold' }
+    treesitter.TSKeywordFunction = { fg = c.func }
+    treesitter.TSMethod          = { fg = c.func }
+    treesitter.TSRepeat          = { fg = c.keyword }
+    treesitter.TSString          = { fg = c.string }
+    treesitter.TSStringEscape    = { fg = c.fg }
+    treesitter.TSStringRegex     = { fg = c.func }
     treesitter.TSVariable        = { fg = c.entity }
     treesitter.TSVariableBuiltin = { fg = c.entity }
   end
