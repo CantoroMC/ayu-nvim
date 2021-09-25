@@ -1,12 +1,9 @@
 local c = require'ayu.colors'
 
-local ayu = {}
+local Theme = {}
 
--- SYNTAX: {{{1
-ayu.define_syntax = function ()
-  -- Fixed: {{{2
+Theme.syntax = function ()
   local syntax = {
-    -- Basics {{{3
     Boolean             = { fg = c.markup },
     Constant            = { fg = c.constant },
     Debug               = { fg = c.accent },
@@ -31,16 +28,59 @@ ayu.define_syntax = function ()
     Type                = { fg = c.entity },
     Typedef             = { fg = c.accent },
     Underlined          = { fg = c.tag, style = 'underline', sp = c.tag },
-    -- }}}
+  }
 
-    -- Languages {{{3
+  if vim.g.ayu_italics_comments then
+    syntax.Comment        = { fg = c.comment, style = 'italic' }
+    syntax.SpecialComment = { fg = c.entity,  style = 'italic' }
+    syntax.Todo           = { fg = c.markup,  style = 'bold,italic' }
+  else
+    syntax.Comment        = { fg = c.comment }
+    syntax.SpecialComment = { fg = c.entity }
+    syntax.Todo           = { fg = c.markup,  style = 'bold' }
+  end
+  if vim.g.ayu_italics_strings then
+    syntax.String      = { fg = c.string,  style = 'italic' }
+    syntax.Character   = { fg = c.markup,  style = 'italic' }
+    syntax.SpecialChar = { fg = c.keyword, style = 'italic' }
+  else
+    syntax.String      = { fg = c.string }
+    syntax.Character   = { fg = c.markup }
+    syntax.SpecialChar = { fg = c.keyword }
+  end
+  if vim.g.ayu_italics_keywords then
+    syntax.Conditional = { fg = c.keyword, style = 'italic' }
+    syntax.Keyword     = { fg = c.keyword, style = 'italic' }
+    syntax.Repeat      = { fg = c.keyword, style = 'italic' }
+  else
+    syntax.Conditional = { fg = c.keyword }
+    syntax.Keyword     = { fg = c.keyword }
+    syntax.Repeat      = { fg = c.keyword }
+  end
+  if vim.g.ayu_italics_functions then
+    syntax.Function = { fg = c.func, style = 'italic' }
+  else
+    syntax.Function = { fg = c.func }
+  end
+  if vim.g.ayu_italics_variables then
+    syntax.Identifier = { fg = c.entity, style = 'italic' }
+  else
+    syntax.Identifier = { fg = c.entity }
+  end
+
+  return syntax
+end
+
+Theme.languages = function()
+  local html = {
     htmlLink            = { fg = c.tag,      style = "underline" },
     htmlH1              = { fg = c.special,  style = "bold" },
     htmlH2              = { fg = c.accent,   style = "bold" },
     htmlH3              = { fg = c.string,   style = "bold" },
     htmlH4              = { fg = c.constant, style = "bold" },
     htmlH5              = { fg = c.keyword,  style = "bold" },
-
+  }
+  local markdown = {
     markdownH1          = { fg = c.special,  style = "bold,italic" },
     markdownH2          = { fg = c.accent,   style = "bold" },
     markdownH3          = { fg = c.string,   style = "bold" },
@@ -51,67 +91,14 @@ ayu.define_syntax = function ()
     markdownH2Delimiter = { fg = c.accent },
     markdownH3Delimiter = { fg = c.string },
     markdownH4Delimiter = { fg = c.tag },
-    -- }}}
   }
-  -- }}}
-
-  -- Options: {{{2
-  -- Italicize comments {{{3
-  if vim.g.ayu_italics_comments then
-    syntax.Comment        = { fg = c.comment, style = 'italic' }
-    syntax.SpecialComment = { fg = c.entity,  style = 'italic' }
-    syntax.Todo           = { fg = c.markup,  style = 'bold,italic' }
-  else
-    syntax.Comment        = { fg = c.comment }
-    syntax.SpecialComment = { fg = c.entity }
-    syntax.Todo           = { fg = c.markup,  style = 'bold' }
-  end
-  -- }}}
-  -- Italicize string and characters {{{3
-  if vim.g.ayu_italics_strings then
-    syntax.String      = { fg = c.string,  style = 'italic' }
-    syntax.Character   = { fg = c.markup,  style = 'italic' }
-    syntax.SpecialChar = { fg = c.keyword, style = 'italic' }
-  else
-    syntax.String      = { fg = c.string }
-    syntax.Character   = { fg = c.markup }
-    syntax.SpecialChar = { fg = c.keyword }
-  end
-  -- }}}
-  -- Italicize keywords {{{3
-  if vim.g.ayu_italics_keywords then
-    syntax.Conditional = { fg = c.keyword, style = 'italic' }
-    syntax.Keyword     = { fg = c.keyword, style = 'italic' }
-    syntax.Repeat      = { fg = c.keyword, style = 'italic' }
-  else
-    syntax.Conditional = { fg = c.keyword }
-    syntax.Keyword     = { fg = c.keyword }
-    syntax.Repeat      = { fg = c.keyword }
-  end
-  -- }}}
-  -- Italicize functions {{{3
-  if vim.g.ayu_italics_functions then
-    syntax.Function = { fg = c.func, style = 'italic' }
-  else
-    syntax.Function = { fg = c.func }
-  end
-  -- }}}
-  -- Italicize variables {{{3
-  if vim.g.ayu_italics_variables then
-    syntax.Identifier = { fg = c.entity, style = 'italic' }
-  else
-    syntax.Identifier = { fg = c.entity }
-  end
-  -- }}}
-  -- }}}
-
-  return syntax
+  return vim.tbl_extend('error',
+    html,
+    markdown
+  )
 end
--- }}}
 
--- EDITOR: {{{1
-ayu.define_editor = function ()
-  -- Fixed: {{{2
+Theme.editor = function ()
   local editor = {
     ColorColumn       = { bg = c.line },
     Conceal           = { fg = c.comment },
@@ -136,7 +123,7 @@ ayu.define_editor = function ()
     ModeMsg           = { fg = c.string },
     MoreMsg           = { fg = c.string },
     NonText           = { fg = c.guide_normal },
-    NormalFloat       = { fg = c.fg,      bg = c.float },
+    NormalFloat       = { fg = c.fg,      bg = c.bg },
     Pmenu             = { fg = c.fg,      bg = c.selection_inactive },
     PmenuSbar         = { fg = c.accent,  bg = c.selection_inactive },
     PmenuSel          = { fg = c.accent,  bg = c.selection_inactive, style = 'reverse' },
@@ -166,10 +153,7 @@ ayu.define_editor = function ()
     healthWarning     = { fg = c.warning },
     qfLineNr          = { fg = c.keyword },
   }
-  -- }}}
 
-  -- Options: {{{2
-  --Set transparent background
   if vim.g.ayu_disable_bg then
     editor.Normal     = { fg = c.fg, bg = c.none }
     editor.SignColumn = { fg = c.fg, bg = c.none }
@@ -177,20 +161,16 @@ ayu.define_editor = function ()
     editor.Normal     = { fg = c.fg, bg = c.bg }
     editor.SignColumn = { fg = c.fg, bg = c.bg }
   end
-  -- Remove window split borders
   if vim.g.ayu_borders then
     editor.VertSplit = { fg = c.panel_border, bg = c.bg }
   else
     editor.VertSplit = { fg = c.bg, bg = c.none }
   end
-  -- }}}
 
   return editor
 end
--- }}}
 
--- TERMINAL: {{{1
-ayu.define_terminal = function ()
+Theme.terminal = function ()
   vim.g.terminal_color_0  = c.bg
   vim.g.terminal_color_1  = c.markup
   vim.g.terminal_color_2  = c.string
@@ -208,11 +188,8 @@ ayu.define_terminal = function ()
   vim.g.terminal_color_14 = c.regexp
   vim.g.terminal_color_15 = c.comment
 end
--- }}}
 
--- TREESITTER: {{{1
-ayu.define_treeSitter = function ()
-  -- Fixed: {{{2
+Theme.treesitter = function ()
   local treesitter = {
     TSAnnotation         = { fg = c.markup },
     TSAttribute          = { fg = c.accent },
@@ -261,17 +238,12 @@ ayu.define_treeSitter = function ()
     TSUnderline          = { sp = c.tag, style = 'underline' },
     TSWarning            = { fg = c.warning },
   }
-  -- }}}
 
-  -- Options: {{{2
-  -- Italicize comments {{{3
   if vim.g.ayu_italics_comments then
     treesitter.TSComment = { fg = c.comment, style = 'italic' }
   else
     treesitter.TSComment = { fg = c.comment }
   end
-  -- }}}
-  -- Italicize string and characters {{{3
   if vim.g.ayu_italics_strings then
     treesitter.TSCharacter    = { fg = c.markup, style = 'italic' }
     treesitter.TSString       = { fg = c.string, style = 'italic' }
@@ -283,8 +255,6 @@ ayu.define_treeSitter = function ()
     treesitter.TSStringEscape = { fg = c.fg }
     treesitter.TSStringRegex  = { fg = c.func }
   end
-  -- }}}
-  -- Italicize keywords {{{3
   if vim.g.ayu_italics_keywords then
     treesitter.TSConditional     = { fg = c.keyword, style = 'italic' }
     treesitter.TSKeyword         = { fg = c.keyword, style = 'bold,italic' }
@@ -296,9 +266,6 @@ ayu.define_treeSitter = function ()
     treesitter.TSKeywordFunction = { fg = c.func }
     treesitter.TSRepeat          = { fg = c.keyword }
   end
-
-  -- }}}
-  -- Italicize functions {{{3
   if vim.g.ayu_italics_functions then
     treesitter.TSFuncBuiltin = { fg = c.special, style = 'italic' }
     treesitter.TSFunction    = { fg = c.func,    style = 'italic' }
@@ -308,8 +275,6 @@ ayu.define_treeSitter = function ()
     treesitter.TSFunction    = { fg = c.func }
     treesitter.TSMethod      = { fg = c.func }
   end
-  -- }}}
-  -- Italicize variables {{{3
   if vim.g.ayu_italics_variables then
     treesitter.TSVariable        = { fg = c.entity, style = 'italic' }
     treesitter.TSVariableBuiltin = { fg = c.entity, style = 'italic' }
@@ -317,16 +282,12 @@ ayu.define_treeSitter = function ()
     treesitter.TSVariable        = { fg = c.entity }
     treesitter.TSVariableBuiltin = { fg = c.entity }
   end
-  -- }}}
-  -- }}}
 
   return treesitter
 end
--- }}}
 
--- LSP: {{{1
-ayu.define_LSP = function ()
-  local lsp = {
+Theme.lsp = function ()
+  return {
     LspCodeLens                          = { fg = c.comment },
     LspDiagnosticsDefaultError           = { fg = c.error },
     LspDiagnosticsDefaultHint            = { fg = c.regexp  },
@@ -356,59 +317,14 @@ ayu.define_LSP = function ()
     LspReferenceText                     = { fg = c.accent, bg = c.panel_bg },
     LspReferenceWrite                    = { fg = c.accent, bg = c.panel_bg },
   }
-
-  return lsp
 end
--- }}}
 
--- PLUGINS: {{{1
-ayu.define_plugins = function()
-  local plugins = {
-    -- BUFFERLINE: {{{2
+Theme.plugins = function()
+  local bufferline = {
     BufferLineIndicatorSelected = { fg = c.accent },
-    BufferLineFill              = { bg = c.sidebar },
-    -- }}}
-    -- CURSORWORD: {{{2
-    CursorWord  = { bg = c.selection_inactive },
-    CursorWord0 = { bg = c.selection_inactive },
-    CursorWord1 = { bg = c.selection_inactive },
-    -- }}}
-    -- COC: {{{2
-    CocCodeLens           = {fg = c.comment },
-    CocDiagnosticsError   = {fg = c.error },
-    CocDiagnosticsHint    = {fg = c.blue },
-    CocDiagnosticsInfo    = {fg = c.tag },
-    CocDiagnosticsWarning = {fg = c.orange },
-    CocErrorFloat         = {fg = c.error },
-    CocErrorHighlight     = {fg = c.none, bg = c.none, style = 'undercurl', sp = c.error },
-    CocErrorSign          = {fg = c.error },
-    CocHintFloat          = {fg = c.regexp },
-    CocHintHighlight      = {fg = c.none, bg = c.none, style = 'undercurl', sp = c.regexp },
-    CocHintSign           = {fg = c.regexp },
-    CocInfoFloat          = {fg = c.tag },
-    CocInfoHighlight      = {fg = c.none, bg = c.none, style = 'undercurl', sp = c.tag },
-    CocInfoSign           = {fg = c.tag },
-    CocSelectedText       = {fg = c.red },
-    CocWarningFloat       = {fg = c.warning },
-    CocWarningHighlight   = {fg = c.none, bg = c.none, style = 'undercurl', sp = c.warning },
-    CocWarningSign        = {fg = c.warning },
-    -- }}}
-    -- DIFF: {{{2
-    diffAdded     = { fg = c.vcs_added },
-    diffChanged   = { fg = c.vcs_modified },
-    diffFile      = { fg = c.guide_active },
-    diffIndexLine = { fg = c.keyword },
-    diffLine      = { fg = c.vcs_diff_text },
-    diffNewFile   = { fg = c.ui },
-    diffOldFile   = { fg = c.guide_normal },
-    diffRemoved   = { fg = c.vcs_removed },
-    -- }}}
-    -- GITGUTTER: {{{2
-    -- GitGutterAdd    = { fg = c.string },
-    -- GitGutterChange = { fg = c.func },
-    -- GitGutterDelete = { fg = c.accent },
-    -- }}}
-    -- GITSIGNS: {{{2
+    BufferLineFill              = { bg = c.bg },
+  }
+  local gitsigns = {
     GitSignsAdd      = { fg = c.vcs_added },
     GitSignsAddNr    = { fg = c.vcs_added },
     GitSignsAddLn    = { fg = c.vcs_added },
@@ -418,59 +334,12 @@ ayu.define_plugins = function()
     GitSignsDelete   = { fg = c.vcs_removed },
     GitSignsDeleteNr = { fg = c.vcs_removed },
     GitSignsDeleteLn = { fg = c.vcs_removed },
-    -- }}}
-    -- Hop {{{2
-    HopNextKey   = { fg = c.keyword, sp = c.keyword, style = 'bold,underline' },
-    HopNextKey1  = { fg = c.entity, sp = c.tag, style = 'bold,underline' },
-    HopNextKey2  = { fg = c.tag },
-    HopUnmatched = { fg = c.comment },
-    -- }}}
-    -- INDENTBLANKLINE: {{{2
+  }
+  local indentblankline = {
     IndentBlanklineChar        = { fg = c.guide_active },
     IndentBlanklineContextChar = { fg = c.guide_active },
-    -- }}}
-    -- LSPSAGA: {{{2
-    -- DiagnosticError            = { fg = c.error },
-    -- DiagnosticWarning          = { fg = c.constant },
-    -- DiagnosticInformation      = { fg = c.tag },
-    -- DiagnosticHint             = { fg = c.keyword },
-    -- DiagnosticTruncateLine     = { fg = c.fg },
-    -- LspFloatWinNormal          = { bg = c.selection_inactive },
-    -- LspFloatWinBorder          = { fg = c.keyword },
-    -- LspSagaBorderTitle         = { fg = c.special },
-    -- LspSagaHoverBorder         = { fg = c.tag },
-    -- LspSagaRenameBorder        = { fg = c.string },
-    -- LspSagaDefPreviewBorder    = { fg = c.string },
-    -- LspSagaCodeActionBorder    = { fg = c.func },
-    -- LspSagaFinderSelection     = { fg = c.string },
-    -- LspSagaCodeActionTitle     = { fg = c.tag },
-    -- LspSagaCodeActionContent   = { fg = c.keyword },
-    -- LspSagaSignatureHelpBorder = { fg = c.keyword },
-    -- ReferencesCount            = { fg = c.keyword },
-    -- DefinitionCount            = { fg = c.keyword },
-    -- DefinitionIcon             = { fg = c.func },
-    -- ReferencesIcon             = { fg = c.func },
-    -- TargetWord                 = { fg = c.special },
-    -- }}}
-    -- LSPTROUBLE: {{{2
-    -- LspTroubleText   = { fg = c.text },
-    -- LspTroubleCount  = { fg = c.keyword, bg = c.line },
-    -- LspTroubleNormal = { fg = c.fg, bg = c.sidebar },
-    -- }}}
-    -- NEOGIT: {{{2
-    -- NeogitBranch               = { fg = c.tag },
-    NeogitDiffAddHighlight     = { fg = c.vcs_added_bg },
-    NeogitDiffContextHighlight = { bg = c.line },
-    NeogitDiffDeleteHighlight  = { bg = c.vcs_removed_bg },
-    NeogitHunkHeader           = { fg = c.tag },
-    NeogitHunkHeaderHighlight  = { fg = c.tag, bg = c.line },
-    -- NeogitRemote               = { fg = c.keyword },
-    -- }}}
-    -- NVIMDAP: {{{2
-    -- DapBreakpoint = { fg = c.accent },
-    -- DapStopped    = { fg = c.string },
-    -- }}}
-    -- NVIMTREE: {{{2
+  }
+  local nvimtree = {
     NvimTreeEmptyFolderName  = { fg = c.fg },
     NvimTreeExecFile         = { fg = c.fg },
     NvimTreeFolderIcon       = { fg = c.accent },
@@ -482,12 +351,13 @@ ayu.define_plugins = function()
     NvimTreeGitStaged        = { fg = c.vcs_modified },
     NvimTreeImageFile        = { fg = c.constant },
     NvimTreeIndentMarker     = { fg = c.guide_normal },
+    NvimTreeNormal           = { fg = c.fg,     bg = c.bg },
     NvimTreeOpenedFolderName = { fg = c.special },
     NvimTreeRootFolder       = { fg = c.keyword },
     NvimTreeSpecialFile      = { fg = c.fg },
     NvimTreeWindowPicker     = { fg = c.keyword, bg = c.panel_border, style = 'bold' },
-    -- }}}
-    -- PACKER: {{{2
+  }
+  local packer = {
     packerBool             = { fg = c.markup,             bg = c.none },
     packerFail             = { fg = c.error,              bg = c.none },
     packerHash             = { fg = c.vcs_added,          bg = c.none },
@@ -507,58 +377,30 @@ ayu.define_plugins = function()
     packerTimeMedium       = { fg = c.selection_inactive, bg = c.none },
     packerTrivial          = { fg = c.warning,            bg = c.none },
     packerWorking          = { fg = c.fg_idle,            bg = c.none },
-    -- }}}
-    -- SNEAK: {{{2
-    -- Sneak      = { fg = c.bg, bg = c.accent },
-    -- SneakScope = { bg = c.selection },
-    -- }}}
-    -- STARTIFY: {{{2
-    StartifyNumber = { fg = c.comment },
+  }
+  local startify = {
     StartifyBracket = { fg = c.comment },
+    StartifyFile    = { fg = c.fg,     bg = c.bg },
+    StartifyFooter  = { fg = c.fg,     bg = c.bg },
+    StartifyNumber  = { fg = c.comment },
+    StartifyPath    = { fg = c.entity, bg = c.bg, style = 'italic' },
     StartifySection = { fg = c.accent },
-    -- }}}
-    -- TELESCOPE: {{{2
-    TelescopeNormal         = { fg = c.fg, bg = c.float },
-    TelescopePromptBorder   = { fg = c.accent },
-    TelescopeResultsBorder  = { fg = c.keyword },
-    TelescopePreviewBorder  = { fg = c.string },
-    TelescopeSelectionCaret = { fg = c.keyword },
-    TelescopeSelection      = { fg = c.keyword, bg = c.line },
-    TelescopeMatching       = { fg = c.special },
-    -- }}}
-    -- TermDebug {{{2
+    StartifySlash   = { fg = c.fg,     bg = c.bg },
+  }
+  local termdebug = {
     debugPC         = { fg = c.none,          bg = c.guide_active },
     debugBreakpoint = { fg = c.gutter_normal, bg = c.accent },
-    -- }}}
-    -- WHICHKEY: {{{2
-    WhichKey          = { fg = c.accent , style = 'bold'},
-    WhichKeyGroup     = { fg = c.entity },
-    WhichKeyDesc      = { fg = c.func, style = 'italic' },
-    WhichKeySeparator = { fg = c.fg },
-    WhichKeyFloating  = { bg = c.float },
-    WhichKeyFloat     = { bg = c.float },
-    -- }}}
   }
 
-  --Set transparent background
-  if vim.g.ayu_disable_bg then
-    plugins.NvimTreeNormal = { fg = c.fg,     bg = c.sidebar }
-    plugins.StartifyFile   = { fg = c.fg,     bg = c.none }
-    plugins.StartifyFooter = { fg = c.fg,     bg = c.none }
-    plugins.StartifySlash  = { fg = c.fg,     bg = c.none }
-    plugins.StartifyPath   = { fg = c.entity, bg = c.none, style = 'italic' }
-  else
-    plugins.NvimTreeNormal = { fg = c.fg,     bg = c.sidebar }
-    plugins.StartifyFile   = { fg = c.fg,     bg = c.bg }
-    plugins.StartifyFooter = { fg = c.fg,     bg = c.bg }
-    plugins.StartifySlash  = { fg = c.fg,     bg = c.bg }
-    plugins.StartifyPath   = { fg = c.entity, bg = c.bg, style = 'italic' }
-  end
-
-  return plugins
+  return vim.tbl_extend('error',
+    bufferline,
+    gitsigns,
+    indentblankline,
+    nvimtree,
+    packer,
+    startify,
+    termdebug
+  )
 end
--- }}}
 
-return ayu
-
--- vim:fdm=marker
+return Theme

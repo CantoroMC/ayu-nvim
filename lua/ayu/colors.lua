@@ -1,12 +1,9 @@
-local utils = require'ayu.utils'
-
 local c = {
   white = '#ffffff',
   black = '#000000',
   none  = 'NONE',
 }
 
--- VARIANTS: mirage, dark and light
 if vim.o.background == 'dark' then
   if vim.g.ayu_mirage then
     -- basics
@@ -90,15 +87,6 @@ if vim.o.background == 'dark' then
     c.vcs_modified_bg    = '#1b2733'
     c.vcs_removed        = '#d96c75'
     c.vcs_removed_bg     = '#2d2220'
-  end
-  -- CONTRAST: sidebars, floating windows and popup menus
-  if vim.g.ayu_contrast then
-    local amount = vim.g.ayu_contrast_amount and vim.g.ayu_contrast_amount or -15
-    c.sidebar = utils.shade(c.bg, amount)
-    c.float   = utils.shade(c.bg, amount)
-  else
-    c.sidebar = c.bg
-    c.float   = c.bg
   end
 else
   -- basics

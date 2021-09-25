@@ -1,46 +1,42 @@
-local ayu   = require'ayu.theme'
-local utils = require'ayu.utils'
+local Ayu = {}
+local Theme = require'ayu.theme'
 
-local M = {}
+function highlight(group, color)
+  local fg    = color.fg    and 'guifg=' .. color.fg    or 'guifg=NONE'
+  local bg    = color.bg    and 'guibg=' .. color.bg    or 'guibg=NONE'
+  local style = color.style and 'gui='   .. color.style or 'gui=NONE'
+  local sp    = color.sp    and 'guisp=' .. color.sp    or ''
 
-function M.apply()
-  vim.api.nvim_command('hi clear')
+  vim.api.nvim_command(string.format(
+    'highlight %s %s %s %s %s',
+    group, fg, bg, style, sp
+  ))
+end
+
+function Ayu.apply()
+  vim.api.nvim_command('highlight clear')
   if vim.fn.exists('syntax_on') then
     vim.api.nvim_command('syntax reset')
   end
   vim.o.termguicolors = true
   vim.g.colors_name   = 'ayu'
 
-  -- Asynchronously Load Plugins, TreeSitter and LSP
   local async
   async = vim.loop.new_async(
     vim.schedule_wrap(
       function ()
-        ayu.define_terminal()
-
-        local plugins = ayu.define_plugins()
-        for group, color in pairs(plugins) do
-          utils.highlight(group, color)
+        Theme.terminal()
+        for group, color in pairs(Theme.plugins()) do
+          highlight(group, color)
         end
-
-        local treeSitter = ayu.define_treeSitter()
-        for group, color in pairs(treeSitter) do
-          utils.highlight(group, color)
+        for group, color in pairs(Theme.treesitter()) do
+          highlight(group, color)
         end
-
-        local lsp = ayu.define_LSP()
-        for group, color in pairs(lsp) do
-          utils.highlight(group, color)
+        for group, color in pairs(Theme.lsp()) do
+          highlight(group, color)
         end
-
-        if vim.g.ayu_contrast then
-          vim.cmd [[
-            augroup ayu_contrast
-              autocmd!
-              autocmd TermOpen *         setlocal winhighlight=Normal:NormalFloat,SignColumn:NormalFloat
-              autocmd FileType packer,qf setlocal winhighlight=Normal:NormalFloat,SignColumn:NormalFloat
-            augroup end
-          ]]
+        for group, color in pairs(Theme.languages()) do
+          highlight(group, color)
         end
 
         async:close()
@@ -48,18 +44,13 @@ function M.apply()
     )
   )
 
-  -- load base theme
-  local editor = ayu.define_editor()
-  for group, color in pairs(editor) do
-    utils.highlight(group, color)
+  for group, color in pairs(Theme.editor()) do
+    highlight(group, color)
   end
-
-  local syntax = ayu.define_syntax()
-  for group, color in pairs(syntax) do
-    utils.highlight(group, color)
+  for group, color in pairs(Theme.syntax()) do
+    highlight(group, color)
   end
-
   async:send()
 end
 
-return M
+return Ayu
