@@ -347,7 +347,7 @@ Theme.plugins = function()
     packerStatus           = { fg = c.entity },
     packerStatusCommit     = { fg = c.vcs_added },
     packerStatusFail       = { fg = c.error },
-    packerStatusSuccess    = { fg = c.tag },
+    packerStatusSuccess    = { fg = c.special },
     packerString           = { fg = c.string, style = 'italic' },
     packerSuccess          = { fg = c.ui },
     packerTimeHigh         = { fg = c.selection_bg },
