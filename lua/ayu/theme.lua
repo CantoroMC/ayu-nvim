@@ -289,6 +289,10 @@ Theme.plugins = function()
     BufferLineIndicatorSelected = { fg = c.accent },
     BufferLineFill              = { bg = c.bg },
   }
+  local cmp = {
+    CmpItemMenu = { fg = c.entity, style = 'italic' },
+    CmpItemKind = { fg = c.entity, style = 'italic' },
+  }
   local gitsigns = {
     GitSignsAdd      = { fg = c.vcs_added },
     GitSignsAddNr    = { fg = c.vcs_added },
@@ -376,6 +380,7 @@ Theme.plugins = function()
 
   return vim.tbl_extend('error',
     bufferline,
+    cmp,
     gitsigns,
     indentblankline,
     nvimtree,
