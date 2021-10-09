@@ -291,7 +291,8 @@ Theme.plugins = function()
   }
   local cmp = {
     CmpItemMenu = { fg = c.entity, style = 'italic' },
-    CmpItemKind = { fg = c.entity, style = 'italic' },
+    CmpItemAbbr = { fg = c.normal, style = 'italic' },
+    -- CmpItemKind = { fg = c.entity, style = 'italic' },
   }
   local gitsigns = {
     GitSignsAdd      = { fg = c.vcs_added },
